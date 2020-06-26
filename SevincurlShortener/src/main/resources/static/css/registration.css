@@ -1,0 +1,105 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+.registration-container {
+    background-image: url('../img/login-bg.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.header {
+    padding: 40px 0;
+}
+
+.header-link {
+    margin-left: 60px;
+}
+
+.registration-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 0 120px 0 90px;
+}
+
+.registration-section-image {
+    width: 50%;
+    transform: scale(0.9);
+}
+
+.registration-section-container {
+    width: 40%;
+    position: relative;
+    top: -70px;
+}
+
+.registration-section-container-title {
+    font-size: 50px;
+    margin-bottom: 15px;
+    margin-top: 0;
+    color: #fff;
+    font-family: sans-serif;
+}
+
+.registration-section-container-description {
+    font-size: 20px;
+    line-height: 36px;
+    color: #fff;
+    margin-bottom: 40px;
+}
+
+.registration-section-container-description-link {
+    font-size: 20px;
+    color: rgba(252, 29, 29, 0.959);
+}
+
+.registration-section-container-form-input-wrapper {
+    width: 100%;
+    outline: none;
+    border-radius: 10px;
+    border: 1px solid #BDBDBD;
+    background-color: #fff;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+}
+
+.registration-section-container-form-input {
+    border: none;
+    height: 42px;
+    flex-grow: 1;
+    font-size: 18px;
+    margin-left: 20px;
+    outline: none;
+}
+
+.mb0 {
+    margin-bottom: 0;
+}
+
+.registration-section-container-form-submit {
+    font-family: 'Roboto', sans-serif;
+    padding: 13px 26px;
+    color: #000;
+    background-color: #fff;
+    font-weight: 500;
+    font-size: 27px;
+    margin-top: 50px;
+    border-radius: 10px;
+    border: none;
+    transition: .5s;
+    cursor: pointer;
+}
+
+.registration-section-container-form-submit:hover {
+    box-shadow: 7px 7px 10px rgb(37, 36, 36);
+}

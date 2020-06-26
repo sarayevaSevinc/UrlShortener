@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+
+<html xmlns:th="https://www.thymeleaf.org">
+
+
+<!-- Mirrored from www.alexshmyrkov.space/URL Shortener/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 24 Jun 2020 13:37:50 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="UTF-8">
+    <title>Tinder: Login</title>
+    <link rel="stylesheet" href="static/css/login.css">
+    <link type="text/css" href="static/css/login.css"
+          th:href="@{/static/css/login.css}" rel="stylesheet" media="screen"/>
+</head>
+
+<body>
+    <div class="login-container">
+        <header class="header">
+            <a href="login.html" class="header-link"><img src="static/img/iba-login-logo.png" alt="IBA Tech Academy"></a>
+        </header>
+
+        <section class="login-section">
+            <img class="login-section-image" src="../static/img/login-img.png" alt="robot w/ computers">
+            <div class="login-section-container">
+                <h1 class="login-section-container-title">Welcome Back!</h1>
+                <p class="login-section-container-description">To keep connected with us please login with personal
+                    information by email address and password</p>
+                <form action="/index" class="login-section-container-form" method="POST">
+                    <div class="login-section-container-form-input-wrapper">
+                        <img src="../static/img/mail-icon.svg" alt="User Icon">
+                        <label for="email"></label>
+                        <input class="login-section-container-form-input" id="email" placeholder="Email address"
+                            type="email" name="email">
+                    </div>
+                    <div class="login-section-container-form-input-wrapper">
+                        <img src="../static/img/lock-icon.svg" alt="User Icon">
+                        <label for="password"></label>
+                        <input class="login-section-container-form-input" id="password" placeholder="Password"
+                            type="password" name="password">
+                    </div>
+                    <div class="login-section-container-options">
+                        <div class="login-section-container-options-wrapper">
+                            <label class="login-section-container-options-checkbox-wrapper">Remember Me
+                                <input type="checkbox" class="login-section-container-options-old-checkbox">
+                                <span class="login-section-container-options-checkmark"></span>
+                            </label>
+                        </div>
+                        <a href="forgot-password.html" class="login-section-container-options-link">Forgot
+                            password?</a>
+                    </div>
+                    <p th:text="${ex}"></p>
+                    <div class="login-section-form-buttons">
+                        <input type="submit" class="login-section-container-form-login" value="Login Now"/>
+                        <a href="registration.html" class="login-section-container-form-signup">Create account</a>
+                    </div>
+                    <div class="login-section-form-social">
+                        <div class="login-section-form-social-description-wrapper">
+                            <hr class="login-section-form-social-description-line">
+                            <span class="login-section-form-social-description">Or you can Join with</span>
+                            <hr class="login-section-form-social-description-line">
+                        </div>
+                        <div class="login-section-form-social-icon-wrapper">
+                            <a href="#" class="login-section-form-social-icon"><img src="../static/img/google-plus.svg"
+                                    alt="Google Plus"></a>
+                            <a href="#" class="login-section-form-social-icon"><img src="../static/img/facebook.svg"
+                                    alt="Facebook"></a>
+                            <a href="#" class="login-section-form-social-icon"><img src="../static/img/linked-in.svg"
+                                    alt="Linked In"></a>
+                            <a href="#" class="login-section-form-social-icon mr0"><img src="../static/img/twitter.svg"
+                                    alt="Twitter"></a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+    <script src="../static/js/checkbox.js"></script>
+</body>
+
+
+<!-- Mirrored from www.alexshmyrkov.space/URL Shortener/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 24 Jun 2020 13:38:58 GMT -->
+</html>
