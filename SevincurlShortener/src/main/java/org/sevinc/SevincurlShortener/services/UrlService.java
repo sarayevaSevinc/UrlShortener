@@ -1,11 +1,9 @@
-package org.sevinc.SevincurlShortener.Services;
+package org.sevinc.SevincurlShortener.services;
 
-import org.hibernate.criterion.Example;
 import org.sevinc.SevincurlShortener.Entity.Url;
 import org.sevinc.SevincurlShortener.Repository.UrlRepository;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,8 +18,8 @@ public class UrlService {
     public void save(Url  url){
         this.repository.save(url);
     }
-    public Optional <Url> searchUrl(String longUrl){
-       return this.repository.findAll().stream().filter(url-> url.getLongUrl().equals(longUrl)).findAny();
+    public Optional <Url> searchUrl(String shortUrl){
+       return this.repository.findAll().stream().filter(url-> url.getShortUrl().equals(shortUrl)).findAny();
 
     }
     public List<Url> getAll(){
@@ -34,7 +32,11 @@ public class UrlService {
     }
     public  int getId(){
         List<Url> all = this.repository.findAll();
-        return all.size()==0 ? 0 : all.stream().max((o1, o2) -> o2.getId()-o1.getId()).get().getId();
+        System.out.println(all.toString());
+        return all.size()==0 ? 0 : all.stream().max((o1, o2) -> o1.getId()-o2.getId()).get().getId();
 
     }
+      public Optional<Url> findAllByShortUrl(String shortUrl){
+        return this.repository.findAllByShortUrl(shortUrl);
+      }
 }

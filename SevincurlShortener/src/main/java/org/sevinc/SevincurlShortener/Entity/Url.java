@@ -25,7 +25,7 @@ public class Url {
     @Column(name = "shortUrl")
     private String shortUrl;
 
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+
     @Column(name = "visitedCount")
     private long visitedCount;
 
@@ -33,7 +33,7 @@ public class Url {
         this.longUrl = longUrl;
         this.shortUrl = shortUrl;
         this.visitedTime = visitedTime;
-
+       this.visitedCount = 0;
     }
 
 }

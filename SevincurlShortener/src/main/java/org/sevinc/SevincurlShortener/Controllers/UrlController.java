@@ -1,10 +1,10 @@
 package org.sevinc.SevincurlShortener.Controllers;
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import lombok.extern.log4j.Log4j2;
-import org.sevinc.SevincurlShortener.Entity.LongUrl;
 import org.sevinc.SevincurlShortener.Entity.Person;
 import org.sevinc.SevincurlShortener.Entity.Url;
-import org.sevinc.SevincurlShortener.Services.UrlService;
+import org.sevinc.SevincurlShortener.services.UrlService;
 import org.sevinc.SevincurlShortener.Entity.Utilities;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpSession;
-import java.util.Optional;
 
 @Log4j2
 @Controller
@@ -39,5 +38,9 @@ public class UrlController {
            Url url1 = new Url(longUrl, utilities.getShortUrl(service.getId()), utilities.getDate());
          service.save(url1);
       return new RedirectView("/mainpage");
+  }
+  @GetMapping("/login")
+    public String handleWrongUrl(Model model){
+        return "login";
   }
 }

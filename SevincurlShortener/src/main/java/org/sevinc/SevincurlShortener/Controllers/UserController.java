@@ -5,15 +5,13 @@ import org.sevinc.SevincurlShortener.Entity.SignUp;
 import org.sevinc.SevincurlShortener.Entity.Login;
 import org.sevinc.SevincurlShortener.Entity.Person;
 import org.sevinc.SevincurlShortener.Entity.Utilities;
-import org.sevinc.SevincurlShortener.Services.UserService;
+import org.sevinc.SevincurlShortener.services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.view.RedirectView;
-
-import javax.jws.WebParam;
 import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
@@ -25,7 +23,6 @@ public class UserController {
     Utilities utilities;
 
     public UserController(UserService service) {
-
         this.service = service;
         utilities = new Utilities();
     }

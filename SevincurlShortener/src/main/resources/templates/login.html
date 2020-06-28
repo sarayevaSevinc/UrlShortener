@@ -1,7 +1,9 @@
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
-<html><head>
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
 <title>404 Not Found</title>
 </head><body>
 <h1>Not Found</h1>
-<p>The requested URL /URL Shortener/login.html was not found on this server.</p>
+
+<p th:text="${ex}">The requested URL /URL Shortener/ was not found on this server.</p>
 </body></html>

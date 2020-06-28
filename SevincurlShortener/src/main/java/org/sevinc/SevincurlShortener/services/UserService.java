@@ -1,4 +1,4 @@
-package org.sevinc.SevincurlShortener.Services;
+package org.sevinc.SevincurlShortener.services;
 
 import org.sevinc.SevincurlShortener.Entity.Login;
 import org.sevinc.SevincurlShortener.Entity.Person;
