@@ -32,9 +32,10 @@ public class Utilities {
         System.out.println(alphabet.toString());
         System.out.println(list.toString());
         System.out.println(alphabet.get(list.get(0)));
-        return  IntStream.range(0, list.size()).map(x-> list.size()-1-x)
+        String url = "http://localhost:8080/";
+        return  url.concat(IntStream.range(0, list.size()).map(x-> list.size()-1-x)
                 .map(x-> list.get(x)).mapToObj(x-> String.valueOf(alphabet.get(x)))
-                .collect(Collectors.joining());
+                .collect(Collectors.joining()));
     }
 
     public boolean isPasswordSecure(String password){
@@ -54,7 +55,7 @@ public class Utilities {
     }
     public  boolean isEmailTrue(String email){
         if(!email.contains("@")) return false;
-        if(!email.split("@")[0].contains(".")) return false;
+        if(!email.split("@")[1].contains(".")) return false;
         return true;
     }
 }

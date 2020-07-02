@@ -8,51 +8,55 @@
     <meta charset="UTF-8">
     <title>Tinder: Registration</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../static/css/registration.css">
+    <link rel="stylesheet" href="/css/registration.css">
 </head>
 
 <body>
     <div class="registration-container">
         <header class="header">
-            <a href="registration.html" class="header-link"><img src="../static/img/iba-login-logo.png"
+            <a href="registration.html" class="header-link"><img src="/img/iba-login-logo.png"
                     alt="IBA Tech Academy"></a>
         </header>
 
         <section class="registration-section">
-            <img class="registration-section-image" src="../static/img/login-img.png" alt="robot w/ computers">
+            <img class="registration-section-image" src="/img/login-img.png" alt="robot w/ computers">
             <div class="registration-section-container">
                 <h1 class="registration-section-container-title">Create an account</h1>
                 <p class="registration-section-container-description">Create your account, it takes less than a minute.
-                    If you already have an account - <a href="index.html"
+                    <span style="color: darkred">Password must longer than 6 characters. And must include at least one UpperCase, one LowerCase, and one Digit.
+                    </span>
+
+                <p th:text="${ex}" > gtgtgtgtg</p> <br>
+                    If you already have an account - <a href="/index"
                         class="registration-section-container-description-link">Login</a></p>
-                <form action="/Registration" class="registration-section-container-form" method="POST">
+                <form action="/register" class="registration-section-container-form" method="POST">
                     <div class="registration-section-container-form-input-wrapper">
-                        <img src="../static/img/user-icon.svg" alt="User Icon">
+                        <img src="/img/user-icon.svg" alt="User Icon">
                         <label for="full-name"></label>
                         <input class="registration-section-container-form-input" id="full-name" placeholder="Full name"
                             type="text" name="fullName">
                     </div>
                     <div class="registration-section-container-form-input-wrapper">
-                        <img src="../static/img/mail-icon.svg" alt="User Icon">
+                        <img src="/img/mail-icon.svg" alt="User Icon">
                         <label for="email"></label>
                         <input class="registration-section-container-form-input" id="email" placeholder="Email address"
                             type="email" name="email">
                     </div>
                     <div class="registration-section-container-form-input-wrapper">
-                        <img src="../static/img/lock-icon.svg" alt="User Icon">
+                        <img src="/img/lock-icon.svg" alt="User Icon">
                         <label for="password"></label>
                         <input class="registration-section-container-form-input" id="password" placeholder="Password"
                             type="password" name="password">
                     </div>
                     <div class="registration-section-container-form-input-wrapper mb0">
-                        <img src="../static/img/lock-icon.svg" alt="User Icon">
+                        <img src="/img/lock-icon.svg" alt="User Icon">
                         <label for="confirm-password"></label>
                         <input class="registration-section-container-form-input" id="confirm-password"
                             placeholder="Confirm Password" type="password" name="passwordAgain">
                     </div>
                     <input type="submit" value="Create account" class="registration-section-container-form-submit">
                 </form>
-                <p th:text="${ex}"></p>
+
             </div>
         </section>
     </div>

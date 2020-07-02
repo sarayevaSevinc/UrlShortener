@@ -1,6 +1,6 @@
 package org.sevinc.SevincurlShortener.Controllers;
 
-import com.sun.org.apache.xpath.internal.operations.Mod;
+
 import lombok.extern.log4j.Log4j2;
 import org.sevinc.SevincurlShortener.Entity.Person;
 import org.sevinc.SevincurlShortener.Entity.Url;
@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Log4j2
@@ -26,16 +27,18 @@ public class UrlController {
     }
 
     @GetMapping("/mainpage")
-    public String getMainPage(Model model){
-        model.addAttribute("links", service.getAll());
+    public String getMainPage(Model model,  HttpSession session){
+        Person user= (Person) session.getAttribute("user");
+        model.addAttribute("links", service.getAllById(user.getId()));
       return "main-page";
   }
 
   @PostMapping("/mainpage")
     public RedirectView postMainPage(@RequestParam String longUrl, HttpSession session){
         log.info(longUrl);
-        log.info((Person)( session.getAttribute("user")));
-           Url url1 = new Url(longUrl, utilities.getShortUrl(service.getId()), utilities.getDate());
+      Person user = (Person )session.getAttribute("user");
+
+           Url url1 = new Url(longUrl, utilities.getShortUrl(service.getId()), utilities.getDate(), user);
          service.save(url1);
       return new RedirectView("/mainpage");
   }

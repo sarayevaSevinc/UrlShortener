@@ -8,31 +8,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tinder: full url</title>
-    <link rel="stylesheet" href="../static/css/user-profile.css">
-    <link rel="stylesheet" href="../static/css/short-url.css">
-    <link rel="stylesheet" href="../static/css/full-url.css">
+    <link rel="stylesheet" href="/css/user-profile.css">
+    <link rel="stylesheet" href="/css/short-url.css">
+    <link rel="stylesheet" href="/css/full-url.css">
 </head>
 <!--The modal windows are commented down below-->
 
 <body>
     <header class="main-header">
-        <a href="main-page.html" class="main-header-logo"><img src="../static/img/iba-tech-logo-white.svg"
+        <a href="main-page.html" class="main-header-logo"><img src="/img/iba-tech-logo-white.svg"
                 alt="IBA Tech Academy"></a>
         <div class="main-header-wrapper">
             <div class="main-header-profile-wrapper">
                 <div class="main-header-profile-credentials">
                     <span class="main-header-username">Anatolii Safronov</span>
                     <div class="log-out-block">
-                        <img src="../static/img/log-out-icon.svg" alt="Log out">
+                        <img src="/img/log-out-icon.svg" alt="Log out">
                         <a href="index.html" class="log-out-btn">Log out</a>
                     </div>
                 </div>
-                <img class="main-header-user-icon" src="../static/img/user-icon-with-background.svg" alt="User Icon">
+                <img class="main-header-user-icon" src="/img/user-icon-with-background.svg" alt="User Icon">
             </div>
         </div>
     </header>
     <main class="full-url-bg-container">
-        <img class="full-url-img" src="../static/img/full-url-robot.png" alt="flying robot">
+        <img class="full-url-img" src="/img/full-url-robot.png" alt="flying robot">
         <div class="full-url-container">
             <h2 class="full-url-title">ENTER YOUR FULL URL</h2>
             <form action="/mainpage" class="full-url-input-container" method="POST">
@@ -40,7 +40,7 @@
                 <input type="submit" class="full-url-btn" value="SHORTEN"/>
             </form>
 
-            <table class="full-url-table">
+            <table class="full-url-table" style="z-index: 400">
                 <tbody>
                 <tr >
                     <thead >
@@ -54,7 +54,7 @@
                         <td><span th:text = "${link.shortUrl}" /> </td>
                         <td><span th:text = "${link.longUrl}" />
                         </td>
-                        <td><span th:text = "${link.visitedCount}" />  <img class="full-url-arrow" src="../static/img/full-url-arrow.png" ></td>
+                        <td><span th:text = "${link.visitedCount}" />  <img class="full-url-arrow" src="/img/full-url-arrow.png" ></td>
                     </tr>
 
 
@@ -69,9 +69,9 @@
 
 
 <!-- ===================== Table modal window ==========================-->
-<!-- <div class="modal">
+<! <div class="modal">
     <div class="modal-window">
-        <a href="#" class="cross"><img src="./img/cross.png" alt="cross"></a>
+        <a href="/mainpage" class="cross"><img src="/img/cross.png" alt="cross"></a>
         <h2 class="full-url-title modal-styles">Your short url</h2>
         <table>
             <tbody class="short-url-table">

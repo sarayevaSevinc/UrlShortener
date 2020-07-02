@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Table;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Data
@@ -26,6 +27,10 @@ public class Person {
     private String email;
     @Column(name = "password")
     private String password;
+
+//    @OneToMany
+//    @JoinColumn(name = "userid", referencedColumnName = "id")
+//    private List<Url> urls;
 
     public Person( String fullName, String email, String password) {
         this.fullName = fullName;

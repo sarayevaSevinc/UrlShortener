@@ -29,6 +29,11 @@ public class Url {
     @Column(name = "visitedCount")
     private long visitedCount;
 
+     @ManyToOne
+     @JoinColumn(name = "userid")
+     private Person user;
+
+
     public Url( String longUrl, String shortUrl, String visitedTime) {
         this.longUrl = longUrl;
         this.shortUrl = shortUrl;
@@ -36,4 +41,11 @@ public class Url {
        this.visitedCount = 0;
     }
 
+    public Url( String longUrl, String shortUrl, String visitedTime, Person p) {
+        this.longUrl = longUrl;
+        this.shortUrl = shortUrl;
+        this.visitedTime = visitedTime;
+        this.visitedCount = 0;
+        this.user = p;
+    }
 }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
 //1
@@ -25,9 +26,9 @@ public class RedirectController {
     }
 
     @GetMapping("/{value}")
-    public RedirectView redirectUrl(@PathVariable String value, Model model, HttpServletRequest request){
-        log.info(value);
-       Optional<Url> url = urlService.searchUrl(value);
+    public RedirectView redirectUrl(@PathVariable String value, Model model, HttpServletRequest request, HttpSession session){
+        log.info(request.getRequestURL()+ "   this is short urlin long url");
+       Optional<Url> url = urlService.searchUrl(request.getRequestURL().toString());
        if(url.isPresent()){
            urlService.increaseVisitedCount(url.get());
            return new RedirectView(url.get().getLongUrl());

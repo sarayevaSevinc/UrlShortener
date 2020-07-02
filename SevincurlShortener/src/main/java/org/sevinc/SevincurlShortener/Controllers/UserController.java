@@ -33,21 +33,21 @@ public class UserController {
     }
 
     @PostMapping("/index")
-    public RedirectView postLogin(Login login, HttpSession session, Model model) {
+    public String postLogin(Login login, HttpSession session, Model model) {
         Optional<Person> person = service.getPerson(login);
         log.info("you are in postLogin");
         if (person.isPresent()) {
             session.setAttribute("user", person.get());
-            return new RedirectView("/landing");
+            return "landing";
         }
         model.addAttribute("ex", "Username or password is incorrect. Please, try again");
-        return new RedirectView("/index");
+        return "index";
 
     }
 
 
-    @GetMapping("/Registration")
-    public String getRegistration() {
+    @GetMapping("/register")
+    public String getRegistration(Model model) {
         return "registration";
     }
 
@@ -61,24 +61,27 @@ public class UserController {
         return new RedirectView("/mainpage");
     }
 
-    @PostMapping("/Registration")
-    public RedirectView postRegistration(SignUp form, Model model) {
-        String ex = new String();
+    @PostMapping("/register")
+    public String postRegistration(SignUp form, Model model) {
+        String ex = new String("");
         if (!form.getPassword().equals(form.getPasswordAgain())) {
-            ex.concat("Passwords are not the same");
+            log.info("i am here");
+            ex = ex.concat("Passwords are not the same");
+
         } else {
-            if (!utilities.isPasswordSecure(form.getPassword())) ex.concat("Password is not secure, please, re enter " +
+            if (!utilities.isPasswordSecure(form.getPassword())) ex = ex.concat("Password is not secure, please, re enter " +
                     "the informations");
             else {
-                if (!utilities.isEmailTrue(form.getEmail())) ex.concat("Email is not valid. Please, enter valid email");
+                if (!utilities.isEmailTrue(form.getEmail())) ex = ex.concat("Email is not valid. Please, enter valid email");
                 else {
                     service.add(new Person(form.getFullName(), form.getEmail(), form.getPassword()));
-                    return new RedirectView("index");
+                    return "index";
                 }
             }
         }
+        log.info(ex);
         model.addAttribute("ex", ex);
-        return new RedirectView("/Registration");
+        return "registration";
 
     }
 }
