@@ -1,10 +1,10 @@
-package org.sevinc.SevincurlShortener.Controllers;
+package org.sevinc.SevincurlShortener.controllers;
 
 import lombok.extern.log4j.Log4j2;
-import org.sevinc.SevincurlShortener.Entity.SignUp;
-import org.sevinc.SevincurlShortener.Entity.Login;
-import org.sevinc.SevincurlShortener.Entity.Person;
-import org.sevinc.SevincurlShortener.Entity.Utilities;
+import org.sevinc.SevincurlShortener.entity.SignUp;
+import org.sevinc.SevincurlShortener.entity.Login;
+import org.sevinc.SevincurlShortener.entity.Person;
+import org.sevinc.SevincurlShortener.entity.Utilities;
 import org.sevinc.SevincurlShortener.services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

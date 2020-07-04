@@ -1,11 +1,9 @@
-package org.sevinc.SevincurlShortener.Entity;
+package org.sevinc.SevincurlShortener.entity;
 
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.Entity;
 
 @Data
 @AllArgsConstructor

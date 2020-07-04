@@ -1,4 +1,4 @@
-package org.sevinc.SevincurlShortener.Entity;
+package org.sevinc.SevincurlShortener.entity;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -58,4 +58,7 @@ public class Utilities {
         if(!email.split("@")[1].contains(".")) return false;
         return true;
     }
+//    public String getDate(){
+//        return new SimpleDateFormat("dd-MM-yyyy").format(new Date());
+//    }
 }

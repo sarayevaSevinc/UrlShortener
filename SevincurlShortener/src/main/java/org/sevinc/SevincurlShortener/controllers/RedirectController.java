@@ -1,7 +1,10 @@
-package org.sevinc.SevincurlShortener.Controllers;
+package org.sevinc.SevincurlShortener.controllers;
 
 import lombok.extern.log4j.Log4j2;
-import org.sevinc.SevincurlShortener.Entity.Url;
+import org.sevinc.SevincurlShortener.entity.Url;
+import org.sevinc.SevincurlShortener.entity.UrlHistory;
+import org.sevinc.SevincurlShortener.entity.Utilities;
+import org.sevinc.SevincurlShortener.services.UrlHistoryService;
 import org.sevinc.SevincurlShortener.services.UrlService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,9 +23,14 @@ import java.util.Optional;
 @RequestMapping("/")
 public class RedirectController {
     UrlService urlService;
+    UrlHistoryService urlHistoryService;
+    Utilities utilities;
 
-    public RedirectController(UrlService urlService) {
+    public RedirectController(UrlService urlService, UrlHistoryService urlHistoryService) {
+
         this.urlService = urlService;
+        this.urlHistoryService = urlHistoryService;
+        this.utilities = new Utilities();
     }
 
     @GetMapping("/{value}")
@@ -31,6 +39,7 @@ public class RedirectController {
        Optional<Url> url = urlService.searchUrl(request.getRequestURL().toString());
        if(url.isPresent()){
            urlService.increaseVisitedCount(url.get());
+           urlHistoryService.add(new UrlHistory(utilities.getDate(), request.getRemoteAddr(), url.get()));
            return new RedirectView(url.get().getLongUrl());
        }
        else{

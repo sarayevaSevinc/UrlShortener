@@ -1,4 +1,4 @@
-package org.sevinc.SevincurlShortener.Entity;
+package org.sevinc.SevincurlShortener.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,11 +9,12 @@ import javax.persistence.*;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@SequenceGenerator(name="UrlSequence", sequenceName="UrlSequence")
 public class Url {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="UrlSequence")
     private int id;
 
     @Column (name = "longUrl")

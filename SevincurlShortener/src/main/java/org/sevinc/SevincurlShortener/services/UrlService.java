@@ -1,8 +1,8 @@
 package org.sevinc.SevincurlShortener.services;
 
 import lombok.extern.log4j.Log4j2;
-import org.sevinc.SevincurlShortener.Entity.Url;
-import org.sevinc.SevincurlShortener.Repository.UrlRepository;
+import org.sevinc.SevincurlShortener.entity.Url;
+import org.sevinc.SevincurlShortener.repository.UrlRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -30,11 +30,11 @@ public class UrlService {
 
     }
     public void increaseVisitedCount(Url url){
-        this.repository.delete(url);
         url.setVisitedCount(url.getVisitedCount()+1);
         this.repository.save(url);
     }
     public  int getId(){
+        //UUID.randomUUID().toString()
         List<Url> all = this.repository.findAll();
         System.out.println(all.toString());
         return all.size()==0 ? 0 : all.stream().max(Comparator.comparingInt(Url::getId)).get().getId();

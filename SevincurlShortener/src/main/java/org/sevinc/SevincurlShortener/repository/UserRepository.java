@@ -1,6 +1,6 @@
-package org.sevinc.SevincurlShortener.Repository;
+package org.sevinc.SevincurlShortener.repository;
 
-import org.sevinc.SevincurlShortener.Entity.Person;
+import org.sevinc.SevincurlShortener.entity.Person;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,8 +1,8 @@
 package org.sevinc.SevincurlShortener.services;
 
-import org.sevinc.SevincurlShortener.Entity.Login;
-import org.sevinc.SevincurlShortener.Entity.Person;
-import org.sevinc.SevincurlShortener.Repository.UserRepository;
+import org.sevinc.SevincurlShortener.entity.Login;
+import org.sevinc.SevincurlShortener.entity.Person;
+import org.sevinc.SevincurlShortener.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;

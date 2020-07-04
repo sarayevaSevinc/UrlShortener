@@ -1,12 +1,10 @@
-package org.sevinc.SevincurlShortener.Entity;
+package org.sevinc.SevincurlShortener.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Table;
 
 import javax.persistence.*;
-import java.util.List;
 
 
 @Data
@@ -15,10 +13,12 @@ import java.util.List;
 
 
 @Entity
+@SequenceGenerator(name="PersonSequence", sequenceName="PersonSequence")
 public class Person {
 
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE ,generator="PersonSequence"
+    )
     @Id
     private int id;
     @Column(name = "fullName")
