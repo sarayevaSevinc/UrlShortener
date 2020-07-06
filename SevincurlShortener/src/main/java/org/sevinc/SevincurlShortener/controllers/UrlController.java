@@ -5,7 +5,7 @@ import lombok.extern.log4j.Log4j2;
 import org.sevinc.SevincurlShortener.entity.Person;
 import org.sevinc.SevincurlShortener.entity.Url;
 import org.sevinc.SevincurlShortener.services.UrlService;
-import org.sevinc.SevincurlShortener.entity.Utilities;
+import org.sevinc.SevincurlShortener.utilities.Utilities;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -37,7 +37,7 @@ public class UrlController {
         log.info(longUrl);
       Person user = (Person )session.getAttribute("user");
 
-           Url url1 = new Url(longUrl, utilities.getShortUrl(service.getId()), utilities.getDate(), user);
+           Url url1 = new Url(longUrl, utilities.getShortUrl(), utilities.getDate(), user);
          service.save(url1);
       return new RedirectView("/mainpage");
   }

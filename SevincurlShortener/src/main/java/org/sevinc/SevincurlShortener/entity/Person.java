@@ -13,11 +13,11 @@ import javax.persistence.*;
 
 
 @Entity
-@SequenceGenerator(name="PersonSequence", sequenceName="PersonSequence")
+//@SequenceGenerator(name="PersonSequence", sequenceName="PersonSequence")
 public class Person {
 
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE ,generator="PersonSequence"
+    @GeneratedValue(strategy = GenerationType.IDENTITY ,generator="PersonSequence"
     )
     @Id
     private int id;

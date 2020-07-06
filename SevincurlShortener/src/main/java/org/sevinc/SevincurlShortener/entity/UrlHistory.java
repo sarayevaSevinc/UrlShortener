@@ -10,11 +10,11 @@ import javax.persistence.*;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@SequenceGenerator(name="UrlHistorySequence", sequenceName="UrlHistorySequence")
+//@SequenceGenerator(name="UrlHistorySequence", sequenceName="UrlHistorySequence")
 public class UrlHistory {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "UrlHistorySequence")
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "UrlHistorySequence")
     @Column(name = "id")
     private int id;
 
@@ -25,7 +25,7 @@ public class UrlHistory {
     private String ip;
 
     @ManyToOne
-    @JoinColumn (name = "urlhistory")
+    @JoinColumn (name = "urlid")
     private Url url;
 
     public UrlHistory(String date, String ip) {

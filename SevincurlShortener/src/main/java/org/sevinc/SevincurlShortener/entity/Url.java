@@ -9,21 +9,21 @@ import javax.persistence.*;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@SequenceGenerator(name="UrlSequence", sequenceName="UrlSequence")
+//@SequenceGenerator(name="UrlSequence", sequenceName="UrlSequence")
 public class Url {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="UrlSequence")
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator="UrlSequence")
     private int id;
 
-    @Column (name = "longUrl")
+    @Column (name = "longUrl", unique = true)
     private String longUrl;
 
       @Column(name = "visitedTime")
      private String visitedTime;
 
-    @Column(name = "shortUrl")
+    @Column(name = "shortUrl" , unique = true)
     private String shortUrl;
 
 

@@ -1,10 +1,11 @@
-package org.sevinc.SevincurlShortener.entity;
+package org.sevinc.SevincurlShortener.utilities;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -20,22 +21,23 @@ public class Utilities {
         LocalDateTime dateTime = LocalDateTime.now();
         return formatter.format(dateTime);
     }
-    public  String getShortUrl(long id){
-        List<Integer> list = new ArrayList<>();
-        int temp = (int)id+1;
-        System.out.println(temp);
-        System.out.println(id+1);
-        while (temp>0){
-            list.add(temp%62);
-            temp = temp/62;
-        }
-        System.out.println(alphabet.toString());
-        System.out.println(list.toString());
-        System.out.println(alphabet.get(list.get(0)));
-        String url = "http://localhost:8080/";
-        return  url.concat(IntStream.range(0, list.size()).map(x-> list.size()-1-x)
-                .map(x-> list.get(x)).mapToObj(x-> String.valueOf(alphabet.get(x)))
-                .collect(Collectors.joining()));
+    public  String getShortUrl(){
+//        List<Integer> list = new ArrayList<>();
+//        int temp = (int)id+1;
+//        System.out.println(temp);
+//        System.out.println(id+1);
+//        while (temp>0){
+//            list.add(temp%62);
+//            temp = temp/62;
+//        }
+//        System.out.println(alphabet.toString());
+//        System.out.println(list.toString());
+//        System.out.println(alphabet.get(list.get(0)));
+//        String url = "http://localhost:8080/";
+//        return  url.concat(IntStream.range(0, list.size()).map(x-> list.size()-1-x)
+//                .map(x-> list.get(x)).mapToObj(x-> String.valueOf(alphabet.get(x)))
+//                .collect(Collectors.joining()));
+        return UUID.randomUUID().toString().substring(0,7);
     }
 
     public boolean isPasswordSecure(String password){

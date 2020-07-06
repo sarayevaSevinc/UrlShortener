@@ -3,7 +3,7 @@ package org.sevinc.SevincurlShortener.controllers;
 import lombok.extern.log4j.Log4j2;
 import org.sevinc.SevincurlShortener.entity.Url;
 import org.sevinc.SevincurlShortener.entity.UrlHistory;
-import org.sevinc.SevincurlShortener.entity.Utilities;
+import org.sevinc.SevincurlShortener.utilities.Utilities;
 import org.sevinc.SevincurlShortener.services.UrlHistoryService;
 import org.sevinc.SevincurlShortener.services.UrlService;
 import org.springframework.stereotype.Controller;
@@ -36,7 +36,7 @@ public class RedirectController {
     @GetMapping("/{value}")
     public RedirectView redirectUrl(@PathVariable String value, Model model, HttpServletRequest request, HttpSession session){
         log.info(request.getRequestURL()+ "   this is short urlin long url");
-       Optional<Url> url = urlService.searchUrl(request.getRequestURL().toString());
+       Optional<Url> url = urlService.searchUrl(value);
        if(url.isPresent()){
            urlService.increaseVisitedCount(url.get());
            urlHistoryService.add(new UrlHistory(utilities.getDate(), request.getRemoteAddr(), url.get()));
