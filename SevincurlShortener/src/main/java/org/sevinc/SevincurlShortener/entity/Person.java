@@ -27,6 +27,10 @@ public class Person {
     private String email;
     @Column(name = "password")
     private String password;
+    private String roles;
+
+    @Transient
+    private final String ROLES_DELIMITER = ":";
 
 //    @OneToMany
 //    @JoinColumn(name = "userid", referencedColumnName = "id")
@@ -36,5 +40,18 @@ public class Person {
         this.fullName = fullName;
         this.email = email;
         this.password = password;
+    }
+    public Person(String email, String password, String... roles) {
+        this.email = email;
+        this.password = password;
+        setRoles(roles);
+    }
+    public String[] getRoles() {
+        if (this.roles == null || this.roles.isEmpty()) return new String[]{};
+        return this.roles.split(ROLES_DELIMITER);
+    }
+
+    private void setRoles(String[] roles) {
+        this.roles = String.join(ROLES_DELIMITER, roles);
     }
 }

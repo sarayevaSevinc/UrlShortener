@@ -1,19 +1,21 @@
 package org.sevinc.SevincurlShortener.controllers;
 
 import lombok.extern.log4j.Log4j2;
-import org.sevinc.SevincurlShortener.entity.PersonDetails;
 import org.sevinc.SevincurlShortener.entity.SignUp;
 import org.sevinc.SevincurlShortener.entity.Login;
 import org.sevinc.SevincurlShortener.entity.Person;
 import org.sevinc.SevincurlShortener.utilities.Utilities;
 import org.sevinc.SevincurlShortener.services.UserService;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.view.RedirectView;
+import security.UserDetailsJPA;
+
 import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
@@ -38,10 +40,6 @@ public class UserController {
     public String postLogin(Login login, HttpSession session, Model model, Authentication auth) {
         Object principal = auth.getPrincipal();
         log.info(principal);
-
-        PersonDetails xd = (PersonDetails) principal;
-        log.info(xd.getId());
-        log.info(xd.getUsername());
         Optional<Person> person = service.getPerson(login);
         log.info("you are in postLogin");
         if (person.isPresent()) {
