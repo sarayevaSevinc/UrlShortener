@@ -2,22 +2,17 @@ package org.sevinc.SevincurlShortener.controllers;
 
 import lombok.extern.log4j.Log4j2;
 import org.sevinc.SevincurlShortener.entity.SignUp;
-import org.sevinc.SevincurlShortener.entity.Login;
 import org.sevinc.SevincurlShortener.entity.Person;
 import org.sevinc.SevincurlShortener.utilities.Utilities;
 import org.sevinc.SevincurlShortener.services.UserService;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.view.RedirectView;
-import security.UserDetailsJPA;
-
-import javax.servlet.http.HttpSession;
-import java.util.Optional;
 
 @Log4j2
 @Controller
@@ -25,6 +20,8 @@ import java.util.Optional;
 public class UserController {
     UserService service;
     Utilities utilities;
+    @Autowired
+    PasswordEncoder encoder;
 
     public UserController(UserService service) {
         this.service = service;
@@ -34,21 +31,6 @@ public class UserController {
     @GetMapping("/index")
     public String getLogin() {
         return "index";
-    }
-
-    @PostMapping("/index")
-    public String postLogin(Login login, HttpSession session, Model model, Authentication auth) {
-        Object principal = auth.getPrincipal();
-        log.info(principal);
-        Optional<Person> person = service.getPerson(login);
-        log.info("you are in postLogin");
-        if (person.isPresent()) {
-            session.setAttribute("user", person.get());
-            return "landing";
-        }
-        model.addAttribute("ex", "Username or password is incorrect. Please, try again");
-        return "index";
-
     }
 
 
@@ -69,23 +51,14 @@ public class UserController {
 
     @PostMapping("/register")
     public String postRegistration(SignUp form, Model model) {
-        String ex = new String("");
-        if (!form.getPassword().equals(form.getPasswordAgain())) {
-            log.info("i am here");
-            ex = ex.concat("Passwords are not the same");
+        boolean flag = utilities.isRegisterOk(form);
+        ;
+        String ex = flag ? new String(""): " Please, enter correct informations. " ;
 
-        } else {
-            if (!utilities.isPasswordSecure(form.getPassword())) ex = ex.concat("Password is not secure, please, re enter " +
-                    "the informations");
-            else {
-                if (!utilities.isEmailTrue(form.getEmail())) ex = ex.concat("Email is not valid. Please, enter valid email");
-                else {
-                    service.add(new Person(form.getFullName(), form.getEmail(), form.getPassword()));
-                    return "index";
-                }
-            }
+        if(flag) {
+            service.add( new Person(form.getFullName(), form.getEmail(), encoder.encode(form.getPassword())));
+            return "index";
         }
-        log.info(ex);
         model.addAttribute("ex", ex);
         return "registration";
 

@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-//@SequenceGenerator(name="UrlHistorySequence", sequenceName="UrlHistorySequence")
+
 public class UrlHistory {
 
     @Id

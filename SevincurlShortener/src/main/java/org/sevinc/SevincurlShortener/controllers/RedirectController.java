@@ -1,5 +1,4 @@
 package org.sevinc.SevincurlShortener.controllers;
-
 import lombok.extern.log4j.Log4j2;
 import org.sevinc.SevincurlShortener.entity.Url;
 import org.sevinc.SevincurlShortener.entity.UrlHistory;
@@ -12,9 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.view.RedirectView;
-
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
 //1
@@ -34,7 +31,7 @@ public class RedirectController {
     }
 
     @GetMapping("/{value}")
-    public RedirectView redirectUrl(@PathVariable String value, Model model, HttpServletRequest request, HttpSession session){
+    public RedirectView redirectUrl(@PathVariable String value, Model model, HttpServletRequest request){
         log.info(request.getRequestURL()+ "   this is short urlin long url");
        Optional<Url> url = urlService.searchUrl(value);
        if(url.isPresent()){

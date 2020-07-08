@@ -34,7 +34,6 @@ public class UrlService {
         this.repository.save(url);
     }
     public  int getId(){
-        //UUID.randomUUID().toString()
         List<Url> all = this.repository.findAll();
         System.out.println(all.toString());
         return all.size()==0 ? 0 : all.stream().max(Comparator.comparingInt(Url::getId)).get().getId();

@@ -3,13 +3,13 @@ package org.sevinc.SevincurlShortener.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 @Data
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-//@SequenceGenerator(name="UrlSequence", sequenceName="UrlSequence")
 public class Url {
 
 
@@ -17,7 +17,7 @@ public class Url {
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator="UrlSequence")
     private int id;
 
-    @Column (name = "longUrl", unique = true)
+    @Column (name = "longUrl", unique = true, length = 4096)
     private String longUrl;
 
       @Column(name = "visitedTime")
@@ -43,6 +43,14 @@ public class Url {
     }
 
     public Url( String longUrl, String shortUrl, String visitedTime, Person p) {
+        this.longUrl = longUrl;
+        this.shortUrl = shortUrl;
+        this.visitedTime = visitedTime;
+        this.visitedCount = 0;
+        this.user = p;
+    }
+    public Url(int id, String longUrl, String shortUrl, String visitedTime, Person p) {
+        this.id = id;
         this.longUrl = longUrl;
         this.shortUrl = shortUrl;
         this.visitedTime = visitedTime;
