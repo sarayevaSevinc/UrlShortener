@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="https://www.thymeleaf.org">
+<html xmlns:th="https://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 
 <!-- Mirrored from www.alexshmyrkov.space/URL Shortener/main-page.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 24 Jun 2020 13:37:26 GMT -->
@@ -16,7 +18,7 @@
 
 <body>
     <header class="main-header">
-        <a href="main-page.html" class="main-header-logo"><img src="/img/iba-tech-logo-white.svg"
+        <a href="main-page2.html" class="main-header-logo"><img src="/img/iba-tech-logo-white.svg"
                 alt="IBA Tech Academy"></a>
         <div class="main-header-wrapper">
             <div class="main-header-profile-wrapper">
@@ -54,12 +56,8 @@
                         <td>http://localhost:8080/<span th:text = "${link.shortUrl}" /> </td>
                         <td><span th:text = "${link.longUrl}" />
                         </td>
-                        <td><form action="/mainpage2" method="GET">
-                            <input type="hidden" th:value="${link.id}" name="id" id="id"/>
-                            <input type="submit" name="submit" th:value="${link.visitedCount}"/>
-                        </form> </td>
-                        <!--<td>  <a href="/mainpage2"><span th:text = "${link.visitedCount}" /> </a>  <img class="full-url-arrow" src="/img/full-url-arrow.png" ></td>
--->
+                        <td>  <a th:href="'/history/' + ${link.id}"><span th:text = "${link.visitedCount}" /> </a>  <img class="full-url-arrow" src="/img/full-url-arrow.png" ></td>
+
                         <!--<form   th:action="@{/history/(id=${link.id})}">
                         <td> <input type="submit" th:value="${link.visitedCount}" >  </td>
                         </form>
@@ -78,59 +76,28 @@
 
 
 <!-- ===================== Table modal window ==========================-->
- <!-- <div class="modal" th:style="'visibility:'+${hidden}">
+ <div class="modal">
     <div class="modal-window">
         <a href="/mainpage" class="cross"><img src="/img/cross.png" alt="cross"></a>
         <h2 class="full-url-title modal-styles">Your short url</h2>
         <table>
             <tbody class="short-url-table">
                 <thead>
-                    <th>Creation date</th>
-                    <th>Short URL</th>
-                    <th>Visit count</th>
+                    <th>Visited Date</th>
+                    <th>Visited Time</th>
+                    <th>Visited Ip</th>
                 </thead>
-                <tr>
-                    <td>21.06.2020</td>
-                    <td>https://cutt.ly/DyL7q0R</td>
+            <tr th:each="history: ${histories}">
+                    <td><span th:text="${history.date}"/> </td>
+                    <td><span th:text="${history.time}"/> </td>
                     </td>
-                    <td>21213400</td>
-                </tr>
-                <tr>
-                    <td>21.06.2020</td>
-                    <td>https://cutt.ly/DyL7q0R</td>
-                    </td>
-                    <td>21213400</td>
-                </tr>
-                <tr>
-                    <td>21.06.2020</td>
-                    <td>https://cutt.ly/DyL7q0R</td>
-                    </td>
-                    <td>21213400</td>
-                </tr>
-                <tr>
-                    <td>21.06.2020</td>
-                    <td>https://cutt.ly/DyL7q0R</td>
-                    </td>
-                    <td>21213400</td>
-                </tr>
-                <tr>
-                    <td>21.06.2020</td>
-                    <td>https://cutt.ly/DyL7q0R</td>
-                    </td>
-                    <td>21213400</td>
-                </tr>
-                <tr>
-                    <td>21.06.2020</td>
-                    <td>https://cutt.ly/DyL7q0R</td>
-                    </td>
-                    <td>21213400</td>
+                    <td><span th:text="${history.ip}"/> </td>
                 </tr>
             </tbody>
         </table>
         <a href="#" class="modal-main-btn">to main</a>
     </div>
 </div>
--->
 </body>
 </html>
 <!-- ===================== Search modal window ==========================-->

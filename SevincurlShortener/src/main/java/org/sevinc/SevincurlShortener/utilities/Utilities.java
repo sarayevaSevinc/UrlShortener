@@ -3,6 +3,8 @@ package org.sevinc.SevincurlShortener.utilities;
 import org.sevinc.SevincurlShortener.entity.Person;
 import org.sevinc.SevincurlShortener.entity.PersonDetails;
 import org.sevinc.SevincurlShortener.entity.SignUp;
+
+import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.UUID;
@@ -13,6 +15,11 @@ public class Utilities {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDateTime dateTime = LocalDateTime.now();
         return formatter.format(dateTime);
+    }
+    public String getTime(){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh-mm-ss");
+        LocalDateTime time = LocalDateTime.now();
+        return formatter.format(time);
     }
     public  String getShortUrl(){
         return UUID.randomUUID().toString().substring(0,7);
@@ -40,5 +47,16 @@ public class Utilities {
 
     public Person  mapperPersonDetailsToUser(PersonDetails personDetails){
         return new Person(personDetails.getId(), personDetails.getFullName(), personDetails.getEmail(), personDetails.getPassword());
+    }
+
+    public  boolean isValid(String url)
+    {
+        try {
+            new URL(url).toURI();
+            return true;
+        }
+        catch (Exception e) {
+            return false;
+        }
     }
 }

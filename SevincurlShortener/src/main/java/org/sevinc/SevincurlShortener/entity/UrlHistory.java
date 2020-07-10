@@ -2,6 +2,7 @@ package org.sevinc.SevincurlShortener.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -10,7 +11,7 @@ import javax.persistence.*;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-
+@Getter
 public class UrlHistory {
 
     @Id
@@ -20,13 +21,17 @@ public class UrlHistory {
 
     @Column(name = "date")
     private String date;
-
+    @Column(name = "time")
+    private String time;
     @Column(name = "ip")
     private String ip;
 
     @ManyToOne
     @JoinColumn (name = "urlid")
     private Url url;
+    @ManyToOne
+    @JoinColumn(name = "personid")
+    private Person person;
 
     public UrlHistory(String date, String ip) {
         this.date  = date;
@@ -36,5 +41,18 @@ public class UrlHistory {
         this.date  = date;
         this.ip = ip;
         this.url = url;
+    }
+    public UrlHistory(String date, String ip, Url url, Person person) {
+        this.date  = date;
+        this.ip = ip;
+        this.url = url;
+        this.person = person;
+    }
+    public UrlHistory(String date,String time,  String ip, Url url, Person person) {
+        this.date  = date;
+        this.time = time;
+        this.ip = ip;
+        this.url = url;
+        this.person = person;
     }
 }

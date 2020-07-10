@@ -3,6 +3,7 @@ package org.sevinc.SevincurlShortener.controllers;
 import lombok.extern.log4j.Log4j2;
 import org.sevinc.SevincurlShortener.entity.PersonDetails;
 import org.sevinc.SevincurlShortener.entity.Url;
+import org.sevinc.SevincurlShortener.services.UrlHistoryService;
 import org.sevinc.SevincurlShortener.services.UrlService;
 import org.sevinc.SevincurlShortener.utilities.Utilities;
 import org.springframework.security.core.Authentication;
@@ -18,25 +19,30 @@ import org.springframework.web.servlet.view.RedirectView;
 public class UrlController {
   UrlService service;
   Utilities utilities;
+  UrlHistoryService urlHistoryService;
 
-    public UrlController(UrlService service) {
+    public UrlController(UrlService service, UrlHistoryService urlHistoryService) {
         this.service = service;
         utilities = new Utilities();
+        this.urlHistoryService = urlHistoryService;
     }
 
     @GetMapping("/mainpage")
     public String getMainPage(Model model, Authentication auth){
         PersonDetails principal = (PersonDetails) auth.getPrincipal();
         model.addAttribute("links", service.getAllById(principal.getId()));
+        model.addAttribute("hidden", "hidden");
       return "main-page";
   }
 
   @PostMapping("/mainpage")
     public RedirectView postMainPage(@RequestParam String longUrl, Authentication auth){
+        if(utilities.isValid(longUrl)){
       PersonDetails principal = (PersonDetails) auth.getPrincipal();
          service.save( new Url(longUrl, utilities.getShortUrl(),
                  utilities.getDate(),
                  utilities.mapperPersonDetailsToUser(principal)));
+        }
         return new RedirectView("/mainpage");
   }
   @GetMapping("/login")
@@ -44,9 +50,21 @@ public class UrlController {
         return "login";
   }
 
-  @GetMapping("/history/{id}")
-    public RedirectView getUrlHistory(@PathVariable  int id){
+
+    @GetMapping("/mainpage2")
+    public String postUrlHistory(@RequestParam  int id, Model model, Authentication authentication){
+        PersonDetails person = (PersonDetails) authentication.getPrincipal();
+        log.info("I am here post mapping main page2");
+        log.info(person.getId());
         log.info(id);
-      return new RedirectView("/mainpage");
-  }
+        model.addAttribute("links", service.getAllById(person.getId()));
+        System.out.println(urlHistoryService.getAllByUrlIdAndUserId(id, person.getId()));
+        model.addAttribute("histories",urlHistoryService.getAllByUrlIdAndUserId(id, person.getId()));
+        log.info(id);
+        return "main-page2";
+    }
+//    @GetMapping("/mainpage2")
+//    public String getMainPage2(Model model){
+//        return "mainpage2";
+//    }
 }

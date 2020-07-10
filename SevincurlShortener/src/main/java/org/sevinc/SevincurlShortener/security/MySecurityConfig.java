@@ -26,7 +26,7 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .antMatchers("/", "/register", "/index", "forgotPassword")
                 .not().authenticated()
-                .antMatchers("/mainpage", "/landing")
+                .antMatchers("/mainpage", "/mainpage2", "/landing")
                 .authenticated();
     }
 }
