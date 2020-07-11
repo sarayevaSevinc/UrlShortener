@@ -1,8 +1,8 @@
 package org.sevinc.SevincurlShortener.controllers;
 
 import lombok.extern.log4j.Log4j2;
-import org.sevinc.SevincurlShortener.entity.SignUp;
-import org.sevinc.SevincurlShortener.entity.Person;
+import org.sevinc.SevincurlShortener.entity.RegistrationRequest;
+import org.sevinc.SevincurlShortener.entity.db.Person;
 import org.sevinc.SevincurlShortener.utilities.Utilities;
 import org.sevinc.SevincurlShortener.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,11 +50,11 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String postRegistration(SignUp form, Model model) {
+    public String postRegistration(RegistrationRequest form, Model model) {
         boolean flag = utilities.isRegisterOk(form);
-        String ex = flag ? new String(""): " Please, enter correct informations. " ;
-        if(flag) {
-            service.add( new Person(form.getFullName(), form.getEmail(), encoder.encode(form.getPassword())));
+        String ex = flag ? new String("") : " Please, enter correct informations. ";
+        if (flag) {
+            service.add(new Person(form.getFullName(), form.getEmail(), encoder.encode(form.getPassword())));
             return "index";
         }
         model.addAttribute("ex", ex);

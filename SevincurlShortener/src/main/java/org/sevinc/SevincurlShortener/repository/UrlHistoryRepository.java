@@ -1,6 +1,6 @@
 package org.sevinc.SevincurlShortener.repository;
 
-import org.sevinc.SevincurlShortener.entity.UrlHistory;
+import org.sevinc.SevincurlShortener.entity.db.UrlHistory;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

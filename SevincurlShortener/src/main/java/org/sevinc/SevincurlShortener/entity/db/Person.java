@@ -1,4 +1,4 @@
-package org.sevinc.SevincurlShortener.entity;
+package org.sevinc.SevincurlShortener.entity.db;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

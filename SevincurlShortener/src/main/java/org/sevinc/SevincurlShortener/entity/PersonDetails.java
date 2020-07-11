@@ -16,9 +16,9 @@ public class PersonDetails implements UserDetails {
     private String password;
     private final Set<GrantedAuthority> authorities = new HashSet<>();
 
-    public PersonDetails() {
-        authorities.add(new SimpleGrantedAuthority("USER"));
-    }
+//    public PersonDetails() {
+//        authorities.add(new SimpleGrantedAuthority("USER"));
+//    }
 
     public PersonDetails(int id, String fullName, String email, String password) {
         this.id = id;

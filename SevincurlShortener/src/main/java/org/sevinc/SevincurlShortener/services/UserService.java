@@ -1,9 +1,9 @@
 package org.sevinc.SevincurlShortener.services;
 
 import lombok.extern.log4j.Log4j2;
-import org.sevinc.SevincurlShortener.entity.ForgotPasswordUrl;
-import org.sevinc.SevincurlShortener.entity.Login;
-import org.sevinc.SevincurlShortener.entity.Person;
+import org.sevinc.SevincurlShortener.entity.db.ForgotPasswordUrl;
+import org.sevinc.SevincurlShortener.entity.LoginRequest;
+import org.sevinc.SevincurlShortener.entity.db.Person;
 import org.sevinc.SevincurlShortener.repository.PasswordUrlRepository;
 import org.sevinc.SevincurlShortener.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +30,7 @@ PasswordUrlRepository urlRepository;
     public Optional <Person> findByEmail(String email){
         return userRepository.findByEmail(email);
     }
-    public Optional<Person> getPerson(Login login){
+    public Optional<Person> getPerson(LoginRequest login){
      return   userRepository.findAllByEmailAndPassword(login.getEmail(), login.getPassword());
     }
    public  void resetPassword(Person person, String password, String url){

@@ -1,9 +1,11 @@
-package org.sevinc.SevincurlShortener.entity;
+package org.sevinc.SevincurlShortener.entity.db;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.sevinc.SevincurlShortener.entity.db.Person;
+import org.sevinc.SevincurlShortener.entity.db.Url;
 
 import javax.persistence.*;
 
@@ -33,21 +35,21 @@ public class UrlHistory {
     @JoinColumn(name = "personid")
     private Person person;
 
-    public UrlHistory(String date, String ip) {
-        this.date  = date;
-        this.ip = ip;
-    }
-    public UrlHistory(String date, String ip, Url url) {
-        this.date  = date;
-        this.ip = ip;
-        this.url = url;
-    }
-    public UrlHistory(String date, String ip, Url url, Person person) {
-        this.date  = date;
-        this.ip = ip;
-        this.url = url;
-        this.person = person;
-    }
+//    public UrlHistory(String date, String ip) {
+//        this.date  = date;
+//        this.ip = ip;
+//    }
+//    public UrlHistory(String date, String ip, Url url) {
+//        this.date  = date;
+//        this.ip = ip;
+//        this.url = url;
+//    }
+//    public UrlHistory(String date, String ip, Url url, Person person) {
+//        this.date  = date;
+//        this.ip = ip;
+//        this.url = url;
+//        this.person = person;
+//    }
     public UrlHistory(String date,String time,  String ip, Url url, Person person) {
         this.date  = date;
         this.time = time;

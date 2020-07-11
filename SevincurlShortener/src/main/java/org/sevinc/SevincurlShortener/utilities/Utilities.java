@@ -1,8 +1,8 @@
 package org.sevinc.SevincurlShortener.utilities;
 
-import org.sevinc.SevincurlShortener.entity.Person;
+import org.sevinc.SevincurlShortener.entity.db.Person;
 import org.sevinc.SevincurlShortener.entity.PersonDetails;
-import org.sevinc.SevincurlShortener.entity.SignUp;
+import org.sevinc.SevincurlShortener.entity.RegistrationRequest;
 
 import java.net.URL;
 import java.time.LocalDateTime;
@@ -43,7 +43,7 @@ public class Utilities {
         }
         return false;
     }
-    public boolean isRegisterOk(SignUp form){
+    public boolean isRegisterOk(RegistrationRequest form){
             return form.getPassword().equals(form.getPasswordAgain()) &&
                     isPasswordSecure(form.getPassword());
     }

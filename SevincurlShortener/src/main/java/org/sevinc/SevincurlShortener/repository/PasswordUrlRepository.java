@@ -1,6 +1,6 @@
 package org.sevinc.SevincurlShortener.repository;
 
-import org.sevinc.SevincurlShortener.entity.ForgotPasswordUrl;
+import org.sevinc.SevincurlShortener.entity.db.ForgotPasswordUrl;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

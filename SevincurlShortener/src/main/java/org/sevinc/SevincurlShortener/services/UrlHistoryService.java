@@ -1,7 +1,7 @@
 package org.sevinc.SevincurlShortener.services;
 
 import lombok.extern.log4j.Log4j2;
-import org.sevinc.SevincurlShortener.entity.UrlHistory;
+import org.sevinc.SevincurlShortener.entity.db.UrlHistory;
 import org.sevinc.SevincurlShortener.repository.UrlHistoryRepository;
 import org.springframework.stereotype.Service;
 

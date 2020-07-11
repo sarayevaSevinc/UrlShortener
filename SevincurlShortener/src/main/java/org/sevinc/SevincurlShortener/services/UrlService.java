@@ -1,7 +1,7 @@
 package org.sevinc.SevincurlShortener.services;
 
 import lombok.extern.log4j.Log4j2;
-import org.sevinc.SevincurlShortener.entity.Url;
+import org.sevinc.SevincurlShortener.entity.db.Url;
 import org.sevinc.SevincurlShortener.repository.UrlRepository;
 import org.springframework.stereotype.Service;
 
@@ -39,7 +39,7 @@ public class UrlService {
         return all.size()==0 ? 0 : all.stream().max(Comparator.comparingInt(Url::getId)).get().getId();
 
     }
-      public Optional<Url> findAllByShortUrl(String shortUrl){
+      public Optional<Url> findByShortUrl(String shortUrl){
         return this.repository.findAllByShortUrl(shortUrl);
       }
 }

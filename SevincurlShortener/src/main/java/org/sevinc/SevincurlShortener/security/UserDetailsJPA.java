@@ -1,6 +1,6 @@
 package org.sevinc.SevincurlShortener.security;
 
-import org.sevinc.SevincurlShortener.entity.Person;
+import org.sevinc.SevincurlShortener.entity.db.Person;
 import org.sevinc.SevincurlShortener.entity.PersonDetails;
 import org.springframework.context.annotation.Configuration;
 
