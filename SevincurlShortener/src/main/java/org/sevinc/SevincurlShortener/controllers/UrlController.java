@@ -46,7 +46,7 @@ public class UrlController {
         return new RedirectView("/mainpage");
   }
   @GetMapping("/login")
-    public String handleWrongUrl(Model model){
+    public String handleWrongUrl(){
         return "login";
   }
 
@@ -54,17 +54,9 @@ public class UrlController {
     @GetMapping("/mainpage2")
     public String postUrlHistory(@RequestParam  int id, Model model, Authentication authentication){
         PersonDetails person = (PersonDetails) authentication.getPrincipal();
-        log.info("I am here post mapping main page2");
-        log.info(person.getId());
-        log.info(id);
         model.addAttribute("links", service.getAllById(person.getId()));
-        System.out.println(urlHistoryService.getAllByUrlIdAndUserId(id, person.getId()));
         model.addAttribute("histories",urlHistoryService.getAllByUrlIdAndUserId(id, person.getId()));
         log.info(id);
         return "main-page2";
     }
-//    @GetMapping("/mainpage2")
-//    public String getMainPage2(Model model){
-//        return "mainpage2";
-//    }
 }

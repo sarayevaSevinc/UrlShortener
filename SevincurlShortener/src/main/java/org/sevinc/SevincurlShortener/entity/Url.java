@@ -20,8 +20,8 @@ public class Url {
     @Column (name = "longUrl", unique = true, length = 4096)
     private String longUrl;
 
-      @Column(name = "visitedTime")
-     private String visitedTime;
+      @Column(name = "createdTime")
+     private String createdTime;
 
     @Column(name = "shortUrl" , unique = true)
     private String shortUrl;
@@ -35,25 +35,25 @@ public class Url {
      private Person user;
 
 
-    public Url( String longUrl, String shortUrl, String visitedTime) {
+    public Url( String longUrl, String shortUrl, String createdTime) {
         this.longUrl = longUrl;
         this.shortUrl = shortUrl;
-        this.visitedTime = visitedTime;
+        this.createdTime = createdTime;
        this.visitedCount = 0;
     }
 
-    public Url( String longUrl, String shortUrl, String visitedTime, Person p) {
+    public Url( String longUrl, String shortUrl, String createdTime, Person p) {
         this.longUrl = longUrl;
         this.shortUrl = shortUrl;
-        this.visitedTime = visitedTime;
+        this.createdTime = createdTime;
         this.visitedCount = 0;
         this.user = p;
     }
-    public Url(int id, String longUrl, String shortUrl, String visitedTime, Person p) {
+    public Url(int id, String longUrl, String shortUrl, String createdTime, Person p) {
         this.id = id;
         this.longUrl = longUrl;
         this.shortUrl = shortUrl;
-        this.visitedTime = visitedTime;
+        this.createdTime = createdTime;
         this.visitedCount = 0;
         this.user = p;
     }

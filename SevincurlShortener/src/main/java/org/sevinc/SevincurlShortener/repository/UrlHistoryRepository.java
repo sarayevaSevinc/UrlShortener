@@ -8,6 +8,5 @@ import java.util.List;
 
 @Repository
 public interface UrlHistoryRepository extends JpaRepository<UrlHistory, Integer> {
-    List<UrlHistory> findAllById(int id);
     List<UrlHistory> findAllByUrlId(int urlid);
 }

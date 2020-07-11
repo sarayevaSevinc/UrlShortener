@@ -24,6 +24,9 @@ public class Utilities {
     public  String getShortUrl(){
         return UUID.randomUUID().toString().substring(0,7);
     }
+    public  String getForgotPasswordUrl(){
+        return UUID.randomUUID().toString().substring(0,7);
+    }
 
     public boolean isPasswordSecure(String password){
         if(password.length()<6) return false;

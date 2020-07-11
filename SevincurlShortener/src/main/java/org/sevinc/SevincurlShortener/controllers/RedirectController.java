@@ -33,10 +33,7 @@ public class RedirectController {
     }
 
     @GetMapping("/{value}")
-    public RedirectView redirectUrl(@PathVariable String value, Model model, HttpServletRequest request
-                                    ){
-
-        log.info(request.getRequestURL()+ "   this is short urlin long url");
+    public RedirectView redirectUrl(@PathVariable String value, Model model, HttpServletRequest request){
        Optional<Url> url = urlService.searchUrl(value);
        if(url.isPresent()){
            urlService.increaseVisitedCount(url.get());
@@ -45,7 +42,6 @@ public class RedirectController {
            return new RedirectView(url.get().getLongUrl());
        }
        else{
-           log.info(request.getRequestURL());
               model.addAttribute("ex", request.getRequestURL());
            return new RedirectView("/login");
        }
