@@ -26,9 +26,7 @@ public class ForgotPasswordUrl {
      @JoinColumn(name = "userid")
       private Person user;
 
-    public ForgotPasswordUrl(String passwordUrl) {
-        this.passwordUrl = passwordUrl;
-    }
+
     public ForgotPasswordUrl(String passwordUrl, Short used, Person person) {
         this.passwordUrl = passwordUrl;
         this.used = used;

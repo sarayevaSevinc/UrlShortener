@@ -3,7 +3,6 @@ package org.sevinc.SevincurlShortener.utilities;
 import org.sevinc.SevincurlShortener.entity.db.Person;
 import org.sevinc.SevincurlShortener.entity.PersonDetails;
 import org.sevinc.SevincurlShortener.entity.RegistrationRequest;
-
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

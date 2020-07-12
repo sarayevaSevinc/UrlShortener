@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
-import java.util.Date;
 
 @Data
 @Entity
@@ -39,21 +38,8 @@ public class Url {
 
     @Column(name = "enabled")
     private Short enabled;
-//    public Url( String longUrl, String shortUrl, String createdTime) {
-//        this.longUrl = longUrl;
-//        this.shortUrl = shortUrl;
-//        this.createdTime = createdTime;
-//       this.visitedCount = 0;
-//    }
 
-    public Url(String longUrl, String shortUrl, String createdTime, Person p, String date) {
-        this.longUrl = longUrl;
-        this.shortUrl = shortUrl;
-        this.createdTime = createdTime;
-        this.visitedCount = 0;
-        this.user = p;
-        this.expiresAt = date;
-    }
+
     public Url(String longUrl, String shortUrl, String createdTime, Person p, String date, Short enabled) {
         this.longUrl = longUrl;
         this.shortUrl = shortUrl;
@@ -63,12 +49,4 @@ public class Url {
         this.expiresAt = date;
         this.enabled = enabled;
     }
-//    public Url(int id, String longUrl, String shortUrl, String createdTime, Person p) {
-//        this.id = id;
-//        this.longUrl = longUrl;
-//        this.shortUrl = shortUrl;
-//        this.createdTime = createdTime;
-//        this.visitedCount = 0;
-//        this.user = p;
-//    }
 }

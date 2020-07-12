@@ -7,10 +7,7 @@ import org.sevinc.SevincurlShortener.entity.db.UrlHistory;
 import org.sevinc.SevincurlShortener.repository.UrlHistoryRepository;
 import org.sevinc.SevincurlShortener.repository.UrlRepository;
 import org.sevinc.SevincurlShortener.utilities.Utilities;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
-
-import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -47,13 +44,6 @@ public class UrlService {
         }
     }
 
-    public Optional<Url> searchUrl(String shortUrl) {
-        return this.repository.findAll().stream().filter(url -> url.getShortUrl().equals(shortUrl)).findAny();
-    }
-
-    public List<Url> getAll() {
-        return this.repository.findAll();
-    }
 
     public List<Url> getAllByUserId(int id) {
         return this.repository.findAllByUserId(id);
