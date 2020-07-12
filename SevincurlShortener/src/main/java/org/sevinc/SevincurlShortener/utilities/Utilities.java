@@ -22,6 +22,7 @@ public class Utilities {
         return formatter.format(time);
     }
     public  String getShortUrl(){
+
         return UUID.randomUUID().toString().substring(0,7);
     }
     public  String getForgotPasswordUrl(){

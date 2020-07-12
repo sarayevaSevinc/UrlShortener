@@ -54,7 +54,7 @@
                         <td>http://localhost:8080/<span th:text = "${link.shortUrl}" /> </td>
                         <td><span th:text = "${link.longUrl}" />
                         </td>
-                        <td><form action="/mainpage2" method="GET">
+                        <td><form action="/urlHistoryModalWindow" method="GET">
                             <input type="hidden" th:value="${link.id}" name="id" id="id"/>
                             <input type="submit" name="submit" th:value="${link.visitedCount}"/>
                         </form> </td>

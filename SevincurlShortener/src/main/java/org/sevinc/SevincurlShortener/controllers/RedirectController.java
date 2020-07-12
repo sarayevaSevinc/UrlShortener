@@ -28,6 +28,6 @@ public class RedirectController {
 
     @GetMapping("/{value}")
     public RedirectView redirectUrl(@PathVariable String value, HttpServletRequest request) {
-        return  new RedirectView(urlService.redirectUrl(value, request.getRequestURL().toString()));
+        return  new RedirectView(urlService.redirectUrl(value, request.getRemoteAddr()));
     }
 }

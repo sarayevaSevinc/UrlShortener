@@ -55,6 +55,6 @@ public class UrlHistory {
         this.time = time;
         this.ip = ip;
         this.url = url;
-      this.person = person;
+        this.person = person;
     }
 }

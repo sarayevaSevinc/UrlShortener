@@ -52,7 +52,7 @@ public class UrlController {
     }
 
 
-    @GetMapping("/urlHistoryModalWindow")
+    @GetMapping("/urlHistoryModalWindow*")
     public String postUrlHistory(@RequestParam int id, Model model, Authentication authentication) {
         PersonDetails person = (PersonDetails) authentication.getPrincipal();
         model.addAttribute("links", service.getAllById(person.getId()));

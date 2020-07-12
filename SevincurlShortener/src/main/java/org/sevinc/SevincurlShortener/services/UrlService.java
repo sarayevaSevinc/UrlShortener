@@ -15,51 +15,58 @@ import java.util.*;
 @Service
 public class UrlService {
 
-     private UrlRepository repository;
-     private Utilities utilities;
-     private UrlHistoryRepository urlHistoryRepository;
+    private UrlRepository repository;
+    private Utilities utilities;
+    private UrlHistoryRepository urlHistoryRepository;
 
     public UrlService(UrlRepository repository, UrlHistoryRepository urlHistoryRepository) {
         this.repository = repository;
         utilities = new Utilities();
         this.urlHistoryRepository = urlHistoryRepository;
     }
-    public void save(Url  url){
+
+    public void save(Url url) {
         this.repository.save(url);
     }
-    public Optional <Url> searchUrl(String shortUrl){
-       return this.repository.findAll().stream().filter(url-> url.getShortUrl().equals(shortUrl)).findAny();
+
+    public Optional<Url> searchUrl(String shortUrl) {
+        return this.repository.findAll().stream().filter(url -> url.getShortUrl().equals(shortUrl)).findAny();
 
     }
-    public List<Url> getAll(){
-        return this.repository.findAll();}
-    public List<Url> getAllById(int id){
+
+    public List<Url> getAll() {
+        return this.repository.findAll();
+    }
+
+    public List<Url> getAllById(int id) {
         return this.repository.findAllByUserId(id);
 
     }
-    public void increaseVisitedCount(Url url){
-        url.setVisitedCount(url.getVisitedCount()+1);
+
+    public void increaseVisitedCount(Url url) {
+        url.setVisitedCount(url.getVisitedCount() + 1);
         this.repository.save(url);
     }
-    public  int getId(){
+
+    public int getId() {
         List<Url> all = this.repository.findAll();
         System.out.println(all.toString());
-        return all.size()==0 ? 0 : all.stream().max(Comparator.comparingInt(Url::getId)).get().getId();
+        return all.size() == 0 ? 0 : all.stream().max(Comparator.comparingInt(Url::getId)).get().getId();
 
     }
 
-      public Optional<Url> findByShortUrl(String shortUrl){
+    public Optional<Url> findByShortUrl(String shortUrl) {
         return this.repository.findAllByShortUrl(shortUrl);
-      }
+    }
 
-      public String redirectUrl(String value, String address) {
-          Optional<Url> url = searchUrl(value);
-          if (url.isPresent()) {
-              increaseVisitedCount(url.get());
-              urlHistoryRepository.save(new UrlHistory(utilities.getDate(),
-                      utilities.getTime(), address, url.get(), url.get().getUser()));
-              return url.get().getLongUrl();
-          }
-          return "/login";
-      }
+    public String redirectUrl(String value, String address) {
+        Optional<Url> url = searchUrl(value);
+        if (url.isPresent()) {
+            increaseVisitedCount(url.get());
+            urlHistoryRepository.save(new UrlHistory(utilities.getDate(),
+                    utilities.getTime(), address, url.get(), url.get().getUser()));
+            return url.get().getLongUrl();
+        }
+        return "/login";
+    }
 }
