@@ -17,7 +17,7 @@
 <body>
     <div class="login-container">
         <header class="header">
-            <a href="login.html" class="header-link"><img src="/img/iba-login-logo.png" alt="IBA Tech Academy"></a>
+            <a href="exceptionPage.html" class="header-link"><img src="/img/iba-login-logo.png" alt="IBA Tech Academy"></a>
         </header>
 
         <section class="login-section">
@@ -55,49 +55,12 @@
                         <input type="submit" class="login-section-container-form-login" value="Login Now"/>
                         <a href="/register" class="login-section-container-form-signup">Create account</a>
                     </div>
-                    <div class="login-section-form-social">
-                        <div class="login-section-form-social-description-wrapper">
-                            <hr class="login-section-form-social-description-line">
-                            <span class="login-section-form-social-description">Or you can Join with</span>
-                            <hr class="login-section-form-social-description-line">
-                        </div>
-                        <div class="login-section-form-social-icon-wrapper">
-                            <a href="#" class="login-section-form-social-icon"><img src="/img/google-plus.svg"
-                                    alt="Google Plus"></a>
-                            <a href="#" class="login-section-form-social-icon"><img src="/img/facebook.svg"
-                                    alt="Facebook"></a>
-                            <a href="#" class="login-section-form-social-icon"><img src="/img/linked-in.svg"
-                                    alt="Linked In"></a>
-                            <a href="#" class="login-section-form-social-icon mr0"><img src="/img/twitter.svg"
-                                    alt="Twitter"></a>
-                        </div>
-                    </div>
+
+
                 </form>
             </div>
         </section>
     </div>
-    <script src="/js/checkbox.js"></script>
-    <script>
-        window.fbAsyncInit = function() {
-            FB.init({
-                appId      : '{your-app-id}',
-                cookie     : true,
-                xfbml      : true,
-                version    : 7.0
-            });
-
-            FB.AppEvents.logPageView();
-
-        };
-
-        (function(d, s, id){
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) {return;}
-            js = d.createElement(s); js.id = id;
-            js.src = "https://connect.facebook.net/en_US/sdk.js";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-    </script>
 </body>
 
 

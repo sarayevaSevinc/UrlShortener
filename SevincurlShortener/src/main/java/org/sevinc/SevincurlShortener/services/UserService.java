@@ -29,10 +29,11 @@ public class UserService  {
         userRepository.save(user);
     }
 
-    public  void resetPassword(Person person, String password, String url){
+    public  void resetPassword(Person person, String password, String url, ForgotPasswordUrl forgotPasswordUrl){
         person.setPassword(encoder.encode(password));
         userRepository.save(person);
-        urlRepository.save(new ForgotPasswordUrl(url));
+        forgotPasswordUrl.setUsed(Short.valueOf("1"));
+        urlRepository.save(forgotPasswordUrl);
     }
 
     public boolean registerUser(RegistrationRequest form){

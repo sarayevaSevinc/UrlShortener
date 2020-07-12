@@ -7,8 +7,11 @@ import org.sevinc.SevincurlShortener.entity.db.UrlHistory;
 import org.sevinc.SevincurlShortener.repository.UrlHistoryRepository;
 import org.sevinc.SevincurlShortener.repository.UrlRepository;
 import org.sevinc.SevincurlShortener.utilities.Utilities;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Log4j2
@@ -29,18 +32,39 @@ public class UrlService {
         this.repository.save(url);
     }
 
+    public void createAndSaveNewUrl(String longUrl, PersonDetails personDetails) {
+        if (utilities.isValid(longUrl)) {
+
+            String shortUrl = utilities.getShortUrl();
+
+            while (repository.countAllByShortUrl(shortUrl) > 0) {
+                shortUrl = utilities.getShortUrl();
+            }
+            save(new Url(longUrl, shortUrl,
+                    utilities.getDate(),
+                    utilities.mapperPersonDetailsToUser(personDetails),
+                    utilities.getExpirationDate(), Short.valueOf("1")));
+        }
+    }
+
     public Optional<Url> searchUrl(String shortUrl) {
         return this.repository.findAll().stream().filter(url -> url.getShortUrl().equals(shortUrl)).findAny();
-
     }
 
     public List<Url> getAll() {
         return this.repository.findAll();
     }
 
-    public List<Url> getAllById(int id) {
+    public List<Url> getAllByUserId(int id) {
         return this.repository.findAllByUserId(id);
+    }
 
+    public void updateEnabled(int id, boolean enabled, PersonDetails personDetails) {
+        Optional<Url> optionalUrl = this.repository.findById(id);
+        if (optionalUrl.isPresent() && optionalUrl.get().getUser().getId() == personDetails.getId()) {
+            optionalUrl.get().setEnabled((short) (enabled ? 1 : 0));
+            this.repository.save(optionalUrl.get());
+        }
     }
 
     public void increaseVisitedCount(Url url) {
@@ -52,21 +76,35 @@ public class UrlService {
         List<Url> all = this.repository.findAll();
         System.out.println(all.toString());
         return all.size() == 0 ? 0 : all.stream().max(Comparator.comparingInt(Url::getId)).get().getId();
-
     }
 
     public Optional<Url> findByShortUrl(String shortUrl) {
-        return this.repository.findAllByShortUrl(shortUrl);
+        return this.repository.findByShortUrl(shortUrl);
     }
 
     public String redirectUrl(String value, String address) {
-        Optional<Url> url = searchUrl(value);
-        if (url.isPresent()) {
-            increaseVisitedCount(url.get());
-            urlHistoryRepository.save(new UrlHistory(utilities.getDate(),
-                    utilities.getTime(), address, url.get(), url.get().getUser()));
-            return url.get().getLongUrl();
+        Optional<Url> optionalUrl = findByShortUrl(value);
+        if (optionalUrl.isPresent()) {
+            Url url = optionalUrl.get();
+            if (isValidUrl(url)) {
+                increaseVisitedCount(url);
+                urlHistoryRepository.save(new UrlHistory(utilities.getDate(),
+                        utilities.getTime(), address, url, url.getUser()));
+                return url.getLongUrl();
+            }
         }
-        return "/login";
+        return "/exception";
+    }
+
+
+    private boolean isValidUrl(Url url) {
+        LocalDateTime expirationDateTime = utilities.parseExpirationDate(url.getExpiresAt());
+        if (expirationDateTime.isBefore(LocalDateTime.now())) {
+            return false;
+        }
+        if (url.getEnabled() == 0) {
+            return false;
+        }
+        return true;
     }
 }

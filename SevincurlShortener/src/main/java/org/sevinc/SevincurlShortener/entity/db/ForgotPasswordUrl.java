@@ -19,9 +19,19 @@ public class ForgotPasswordUrl {
     @Column(name = "passwordUrl")
     private String passwordUrl;
 
+     @Column(name = "used")
+     private Short used;
 
+     @ManyToOne
+     @JoinColumn(name = "userid")
+      private Person user;
 
     public ForgotPasswordUrl(String passwordUrl) {
         this.passwordUrl = passwordUrl;
+    }
+    public ForgotPasswordUrl(String passwordUrl, Short used, Person person) {
+        this.passwordUrl = passwordUrl;
+        this.used = used;
+        this.user = person;
     }
 }

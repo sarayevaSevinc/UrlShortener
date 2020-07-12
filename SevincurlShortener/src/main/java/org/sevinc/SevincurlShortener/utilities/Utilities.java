@@ -11,55 +11,69 @@ import java.util.UUID;
 
 public class Utilities {
 
-    public String getDate(){
+
+    public String getDate() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDateTime dateTime = LocalDateTime.now();
         return formatter.format(dateTime);
     }
-    public String getTime(){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh-mm-ss");
+
+    public String getExpirationDate() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime dateTime = LocalDateTime.now().plusYears(5);
+        return formatter.format(dateTime);
+    }
+
+    public LocalDateTime parseExpirationDate(String date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        return LocalDateTime.from(formatter.parse(date));
+    }
+
+    public String getTime() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
         LocalDateTime time = LocalDateTime.now();
         return formatter.format(time);
     }
-    public  String getShortUrl(){
 
-        return UUID.randomUUID().toString().substring(0,7);
-    }
-    public  String getForgotPasswordUrl(){
-        return UUID.randomUUID().toString().substring(0,7);
+    public String getShortUrl() {
+
+        return UUID.randomUUID().toString().substring(0, 6);
     }
 
-    public boolean isPasswordSecure(String password){
-        if(password.length()<6) return false;
+    public String getForgotPasswordUrl() {
+        return UUID.randomUUID().toString().substring(0, 6);
+    }
+
+    public boolean isPasswordSecure(String password) {
+        if (password.length() < 6) return false;
         boolean isLower = false;
         boolean isUpper = false;
         boolean isDigit = false;
 
-        for (Character c:password.toCharArray()) {
-            if(Character.isDigit(c) )  isDigit = true;
-            if(Character.isUpperCase(c)) isUpper = true;
-            if(Character.isLowerCase(c)) isLower = true;
-            if(isUpper && isLower && isDigit) return true;
+        for (Character c : password.toCharArray()) {
+            if (Character.isDigit(c)) isDigit = true;
+            if (Character.isUpperCase(c)) isUpper = true;
+            if (Character.isLowerCase(c)) isLower = true;
+            if (isUpper && isLower && isDigit) return true;
 
         }
         return false;
     }
-    public boolean isRegisterOk(RegistrationRequest form){
-            return form.getPassword().equals(form.getPasswordAgain()) &&
-                    isPasswordSecure(form.getPassword());
+
+    public boolean isRegisterOk(RegistrationRequest form) {
+        return form.getPassword().equals(form.getPasswordAgain()) &&
+                isPasswordSecure(form.getPassword());
     }
 
-    public Person  mapperPersonDetailsToUser(PersonDetails personDetails){
+    public Person mapperPersonDetailsToUser(PersonDetails personDetails) {
         return new Person(personDetails.getId(), personDetails.getFullName(), personDetails.getEmail(), personDetails.getPassword());
     }
 
-    public  boolean isValid(String url)
-    {
+    public boolean isValid(String url) {
         try {
             new URL(url).toURI();
             return true;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             return false;
         }
     }

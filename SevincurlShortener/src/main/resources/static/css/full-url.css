@@ -90,14 +90,16 @@ td {
     border: .5px solid #ad9e9e;
     text-align: center;
     padding: 0 20px;
-    font-size: 24px;
+    font-size: 16px;
+    width: 10%;
     color: #333333;
     background-color: #F9FAFC;
 }
 
-.full-url-table tr td:nth-child(4) {
-    position: relative;
-    padding: 0 45px;
+.full-url-table tr>td:nth-child(4) {
+    font-size: 16px;
+    padding: 10px 20px;
+    width: 10%;
 }
 
 thead {
@@ -115,8 +117,9 @@ th {
 
 
 .full-url-table tr>td:nth-child(2) {
-    font-size: 18px;
+    font-size: 16px;
     padding: 10px 20px;
+    width: 20%;
 }
 
 .full-url-table tr>td:nth-child(3) {
@@ -124,6 +127,7 @@ th {
     color: #828282;
     text-align: left;
     padding: 10px 20px;
+    width: 50%;
 }
 
 @media(min-width: 1770px) {

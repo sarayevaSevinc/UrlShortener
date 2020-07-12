@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -33,13 +34,18 @@ public class ForgotPasswordController {
 
     @PostMapping("/forgotPassword")
     public String postForgotPassword(@RequestParam String email, HttpSession session, Model model) {
-        return  passwordUrlService.postForgotPassword(email, session, model) ?  "reset-password"
+        return passwordUrlService.postForgotPassword(email, session, model) ? "successForgotPasswordPage"
                 : "forgot-Password";
     }
 
+    @GetMapping("/resetpassword/*")
+    public String getResetPassword(HttpServletRequest request) {
+        return passwordUrlService.redirectResetPasswordUrl(request.getRequestURL().toString().substring(21));
+    }
+
     @PostMapping("/resetpassword/*")
-    public String postResetPassword(ForgotPasswordRequest form, HttpSession session, Model model, HttpServletRequest request) {
-        if(passwordUrlService.resetUserPassword(form, session, model, request)) return "index";
+    public String postResetPassword(ForgotPasswordRequest form, Model model, HttpServletRequest request) {
+        if (passwordUrlService.resetUserPassword(form,  request)) return "index";
         model.addAttribute("ex", "Informations are not true. Please, try again");
         return "reset-password";
     }

@@ -21,7 +21,7 @@
         <div class="main-header-wrapper">
             <div class="main-header-profile-wrapper">
                 <div class="main-header-profile-credentials">
-                    <span class="main-header-username">Anatolii Safronov</span>
+                    <span class="main-header-username"><span th:text="${name}"/> </span>
                     <div class="log-out-block">
                         <img src="/img/log-out-icon.svg" alt="Log out">
                         <a href="/logout" class="log-out-btn">Log out</a>
@@ -42,22 +42,31 @@
 
             <table class="full-url-table" style="z-index: 400">
                 <tbody>
-                <tr >
-                    <thead >
-                        <th>Creation date</th>
+                <tr>
+                    <thead>
+                        <th>Creation Date</th>
                         <th>Short URL</th>
                         <th>Full URL</th>
-                        <th>Visit count</th>
+                        <th>Exp Time</th>
+                        <th>Visit Count</th>
+                        <th>Enabled</th>
                     </thead>
                     <tr th:each="link: ${links}">
                         <td> <span th:text = "${link.createdTime}" /> </td>
                         <td>http://localhost:8080/<span th:text = "${link.shortUrl}" /> </td>
-                        <td><span th:text = "${link.longUrl}" />
-                        </td>
+                        <td><span th:text = "${link.longUrl}" /> </td>
+                        <td><span th:text = "${link.expiresAt}" /> </td>
                         <td><form action="/urlHistoryModalWindow" method="GET">
                             <input type="hidden" th:value="${link.id}" name="id" id="id"/>
                             <input type="submit" name="submit" th:value="${link.visitedCount}"/>
                         </form> </td>
+                        <td> <form action="/updateEnabled" method="POST">
+                            <input type="hidden" th:value="${link.id}" name="id" id="id"/>
+                            <input type="checkbox" name="enabled" th:checked="${link.enabled}"   onchange="this.form.submit()"/>
+                        </form>
+
+                        </td>
+
                         <!--<td>  <a href="/mainpage2"><span th:text = "${link.visitedCount}" /> </a>  <img class="full-url-arrow" src="/img/full-url-arrow.png" ></td>
 -->
                         <!--<form   th:action="@{/history/(id=${link.id})}">

@@ -1,5 +1,6 @@
 package org.sevinc.SevincurlShortener.repository;
 
+
 import org.sevinc.SevincurlShortener.entity.db.Url;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -9,7 +10,12 @@ import java.util.Optional;
 
 @Repository
 public interface UrlRepository extends JpaRepository<Url, Integer> {
-     Optional<Url> findAllByShortUrl(String shortUrl);
-    List<Url> findAllByUserId (int id);
+
+    List<Url> findAllByUserId(int id);
+
     Optional<Url> findById(int id);
+
+    Optional<Url> findByShortUrl(String shortUrl);
+
+    int countAllByShortUrl(String shortUrl);
 }

@@ -1,6 +1,8 @@
 package org.sevinc.SevincurlShortener.services;
 
+import lombok.extern.log4j.Log4j2;
 import org.sevinc.SevincurlShortener.entity.ForgotPasswordRequest;
+import org.sevinc.SevincurlShortener.entity.db.ForgotPasswordUrl;
 import org.sevinc.SevincurlShortener.entity.db.Person;
 import org.sevinc.SevincurlShortener.repository.PasswordUrlRepository;
 import org.sevinc.SevincurlShortener.repository.UserRepository;
@@ -12,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
+@Log4j2
 @Service
 public class PasswordUrlService {
     PasswordUrlRepository repository;
@@ -30,24 +33,51 @@ public class PasswordUrlService {
     public boolean postForgotPassword(String email, HttpSession session, Model model) {
         Optional<Person> byEmail = userRepository.findByEmail(email);
         if (byEmail.isPresent()) {
-            session.setAttribute("email", email);
-            session.setAttribute("predictUser", byEmail.get());
             String resetUrl = "/resetpassword/" + utilities.getForgotPasswordUrl();
-            model.addAttribute("url", resetUrl);
+            log.info(resetUrl);
+            model.addAttribute("email", email);
+            repository.save(new ForgotPasswordUrl(resetUrl, Short.valueOf("0"), byEmail.get()));
             return true;
         }
         return false;
     }
 
-    public boolean resetUserPassword(ForgotPasswordRequest form, HttpSession session, Model model, HttpServletRequest request) {
-        String url = request.getRequestURL().toString();
-        if (!repository.findByPasswordUrl(url).isPresent()) {
-            Person person = (Person) session.getAttribute("predictUser");
+    public boolean resetUserPassword(ForgotPasswordRequest form, HttpServletRequest request) {
+        String url = request.getRequestURL().toString().substring(21);
+        Optional<ForgotPasswordUrl> forgotPasswordUrl = repository.findByPasswordUrl(url);
+        log.info(forgotPasswordUrl.toString());
+        if (forgotPasswordUrl.isPresent()) {
+            log.info("I am here ");
+            Person person = forgotPasswordUrl.get().getUser();
+            log.info(forgotPasswordUrl.get().toString());
+            log.info(person.toString());
+            log.info(form.toString());
             if (form.getFullName().equals(person.getFullName()) && form.getPassword().equals(form.getPasswordAgain())) {
-                userService.resetPassword(person, form.getPassword(), url);
+                userService.resetPassword(person, form.getPassword(), url, forgotPasswordUrl.get());
+                log.info("i am inside of if");
                 return true;
             }
         }
         return false;
+    }
+
+    public Optional<ForgotPasswordUrl> findByUrl(String url){
+      return   repository.findByPasswordUrl(url);
+    }
+    public boolean urlIsUsed(String url){
+        if(repository.findByPasswordUrl(url).isPresent())
+        return  repository.findByPasswordUrl(url).get().getUsed()==1;
+        return false;
+    }
+    public  void  disableResetPasswordUrl(String url){
+        Optional<ForgotPasswordUrl> byUrl = findByUrl(url);
+        byUrl.get().setUsed( Short.valueOf("1"));
+        repository.save(byUrl.get());
+    }
+    public String redirectResetPasswordUrl(String url){
+        log.info(url);
+        if(urlIsUsed(url)) return "forgot-password";
+        disableResetPasswordUrl(url);
+        return "reset-password";
     }
 }
