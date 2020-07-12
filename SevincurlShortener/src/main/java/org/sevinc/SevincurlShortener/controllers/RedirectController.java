@@ -20,7 +20,6 @@ public class RedirectController {
     Utilities utilities;
 
     public RedirectController(UrlService urlService, UrlHistoryService urlHistoryService) {
-
         this.urlService = urlService;
         this.urlHistoryService = urlHistoryService;
         this.utilities = new Utilities();

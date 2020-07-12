@@ -1,10 +1,12 @@
 package org.sevinc.SevincurlShortener.controllers;
 
 import lombok.extern.log4j.Log4j2;
+import org.sevinc.SevincurlShortener.entity.PersonDetails;
 import org.sevinc.SevincurlShortener.entity.RegistrationRequest;
 import org.sevinc.SevincurlShortener.utilities.Utilities;
 import org.sevinc.SevincurlShortener.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,7 +41,9 @@ public class UserController {
     }
 
     @GetMapping("/landing")
-    public String getLanding() {
+    public String getLanding(Authentication auth, Model model) {
+        PersonDetails personDetails = (PersonDetails) auth.getPrincipal();
+         model.addAttribute("user", personDetails.getFullName());
         return "landing";
     }
 

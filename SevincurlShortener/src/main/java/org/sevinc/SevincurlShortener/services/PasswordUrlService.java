@@ -20,12 +20,13 @@ public class PasswordUrlService {
     UserRepository userRepository;
     Utilities utilities;
     UserService userService;
-
-    public PasswordUrlService(PasswordUrlRepository repository, UserRepository userRepository, UserService userService) {
+    MailService mailService;
+    public PasswordUrlService(PasswordUrlRepository repository, UserRepository userRepository, UserService userService, MailService mailService) {
         this.repository = repository;
         this.userRepository = userRepository;
         utilities = new Utilities();
         this.userService = userService;
+        this.mailService = mailService;
     }
 
 
@@ -34,6 +35,7 @@ public class PasswordUrlService {
         if (byEmail.isPresent()) {
             String resetUrl = "/resetpassword/" + utilities.getForgotPasswordUrl();
             log.info(resetUrl);
+            mailService.method1(email, resetUrl);
             model.addAttribute("email", email);
             repository.save(new ForgotPasswordUrl(resetUrl, Short.valueOf("0"), byEmail.get()));
             return true;
