@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+
+
+<!-- Mirrored from www.alexshmyrkov.space/URL Shortener/landing.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 24 Jun 2020 13:39:15 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tinder: short url</title>
+    <link rel="stylesheet" href="/css/user-profile.css">
+    <link rel="stylesheet" href="/css/short-url.css">
+</head>
+
+<body>
+
+    <header class="main-header">
+        <a href="main-page.html" class="main-header-logo"><img src="/img/iba-tech-logo-white.svg"
+                alt="IBA Tech Academy"></a>
+        <div class="main-header-wrapper">
+            <div class="main-header-profile-wrapper">
+                <div class="main-header-profile-credentials">
+                    <span class="main-header-username"><span th:text = "${user}"></span>
+                    <div class="log-out-block">
+                        <img src="../static/img/log-out-icon.svg" alt="Log out">
+                        <a href="/logout" class="log-out-btn">Log out</a>
+                    </div>
+                </div>
+                <img class="main-header-user-icon" src="/img/user-icon-with-background.svg" alt="User Icon">
+            </div>
+        </div>
+    </header>
+    <main class="short-url-container">
+        <div>
+            <img src="/img/short-url-robot.png" class="short-url-img" alt="robot">
+        </div>
+        <div class="short-url-content">
+            <h2 class="short-url-title">Lorem</h2>
+            <p class="short-url-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <form method="post" action="/landing">
+            <input type="submit" class="short-url-btn" value="get started"/>
+            </form>
+        </div>
+    </main>
+</body>
+
+
+<!-- Mirrored from www.alexshmyrkov.space/URL Shortener/landing.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 24 Jun 2020 13:39:15 GMT -->
+</html>
