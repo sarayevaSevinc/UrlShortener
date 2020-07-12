@@ -16,9 +16,6 @@ public class UrlHistoryService {
         this.repository = urlHistoryRepository;
     }
 
-    public void add(UrlHistory urlHistory){
-        this.repository.save(urlHistory);
-    }
     public List<UrlHistory> getAllByUrlId(int id){
         return this.repository.findAllByUrlId(id);
     }

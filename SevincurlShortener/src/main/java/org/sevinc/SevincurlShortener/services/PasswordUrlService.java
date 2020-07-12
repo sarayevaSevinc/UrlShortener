@@ -9,7 +9,6 @@ import org.sevinc.SevincurlShortener.repository.UserRepository;
 import org.sevinc.SevincurlShortener.utilities.Utilities;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Optional;
@@ -45,16 +44,10 @@ public class PasswordUrlService {
     public boolean resetUserPassword(ForgotPasswordRequest form, HttpServletRequest request) {
         String url = request.getRequestURL().toString().substring(21);
         Optional<ForgotPasswordUrl> forgotPasswordUrl = repository.findByPasswordUrl(url);
-        log.info(forgotPasswordUrl.toString());
         if (forgotPasswordUrl.isPresent()) {
-            log.info("I am here ");
             Person person = forgotPasswordUrl.get().getUser();
-            log.info(forgotPasswordUrl.get().toString());
-            log.info(person.toString());
-            log.info(form.toString());
             if (form.getFullName().equals(person.getFullName()) && form.getPassword().equals(form.getPasswordAgain())) {
                 userService.resetPassword(person, form.getPassword(), url, forgotPasswordUrl.get());
-                log.info("i am inside of if");
                 return true;
             }
         }
