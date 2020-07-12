@@ -52,12 +52,12 @@ public class UrlController {
     }
 
 
-    @GetMapping("/mainpage2")
+    @GetMapping("/urlHistoryModalWindow")
     public String postUrlHistory(@RequestParam int id, Model model, Authentication authentication) {
         PersonDetails person = (PersonDetails) authentication.getPrincipal();
         model.addAttribute("links", service.getAllById(person.getId()));
         model.addAttribute("histories", urlHistoryService.getAllByUrlIdAndUserId(id, person.getId()));
         log.info(id);
-        return "main-page2";
+        return "urlHistoryModalWindow";
     }
 }

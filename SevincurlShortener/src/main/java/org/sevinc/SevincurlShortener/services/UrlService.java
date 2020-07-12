@@ -1,8 +1,12 @@
 package org.sevinc.SevincurlShortener.services;
 
 import lombok.extern.log4j.Log4j2;
+import org.sevinc.SevincurlShortener.entity.PersonDetails;
 import org.sevinc.SevincurlShortener.entity.db.Url;
+import org.sevinc.SevincurlShortener.entity.db.UrlHistory;
+import org.sevinc.SevincurlShortener.repository.UrlHistoryRepository;
 import org.sevinc.SevincurlShortener.repository.UrlRepository;
+import org.sevinc.SevincurlShortener.utilities.Utilities;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -12,9 +16,13 @@ import java.util.*;
 public class UrlService {
 
      private UrlRepository repository;
+     private Utilities utilities;
+     private UrlHistoryRepository urlHistoryRepository;
 
-    public UrlService(UrlRepository repository) {
+    public UrlService(UrlRepository repository, UrlHistoryRepository urlHistoryRepository) {
         this.repository = repository;
+        utilities = new Utilities();
+        this.urlHistoryRepository = urlHistoryRepository;
     }
     public void save(Url  url){
         this.repository.save(url);
@@ -39,7 +47,19 @@ public class UrlService {
         return all.size()==0 ? 0 : all.stream().max(Comparator.comparingInt(Url::getId)).get().getId();
 
     }
+
       public Optional<Url> findByShortUrl(String shortUrl){
         return this.repository.findAllByShortUrl(shortUrl);
+      }
+
+      public String redirectUrl(String value, String address) {
+          Optional<Url> url = searchUrl(value);
+          if (url.isPresent()) {
+              increaseVisitedCount(url.get());
+              urlHistoryRepository.save(new UrlHistory(utilities.getDate(),
+                      utilities.getTime(), address, url.get(), url.get().getUser()));
+              return url.get().getLongUrl();
+          }
+          return "/login";
       }
 }

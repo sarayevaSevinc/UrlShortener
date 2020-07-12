@@ -35,26 +35,26 @@ public class UrlHistory {
     @JoinColumn(name = "personid")
     private Person person;
 
-//    public UrlHistory(String date, String ip) {
-//        this.date  = date;
-//        this.ip = ip;
-//    }
-//    public UrlHistory(String date, String ip, Url url) {
-//        this.date  = date;
-//        this.ip = ip;
-//        this.url = url;
-//    }
-//    public UrlHistory(String date, String ip, Url url, Person person) {
-//        this.date  = date;
-//        this.ip = ip;
-//        this.url = url;
-//        this.person = person;
-//    }
+    public UrlHistory(String date, String ip) {
+        this.date  = date;
+        this.ip = ip;
+    }
+    public UrlHistory(String date, String ip, Url url) {
+        this.date  = date;
+        this.ip = ip;
+        this.url = url;
+    }
+    public UrlHistory(String date, String ip, Url url, Person person) {
+        this.date  = date;
+        this.ip = ip;
+        this.url = url;
+        this.person = person;
+    }
     public UrlHistory(String date,String time,  String ip, Url url, Person person) {
         this.date  = date;
         this.time = time;
         this.ip = ip;
         this.url = url;
-        this.person = person;
+      this.person = person;
     }
 }
