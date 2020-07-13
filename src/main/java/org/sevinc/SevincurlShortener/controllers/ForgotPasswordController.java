@@ -33,7 +33,7 @@ public class ForgotPasswordController {
 
     @PostMapping("/forgotPassword")
     public String postForgotPassword(@RequestParam String email, HttpSession session, Model model) {
-        return passwordUrlService.postForgotPassword(email, session, model) ? "successForgotPasswordPage"
+        return passwordUrlService.postForgotPassword(email,  model) ? "successForgotPasswordPage"
                 : "forgot-Password";
     }
 

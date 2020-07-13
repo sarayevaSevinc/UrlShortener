@@ -30,7 +30,7 @@ public class PasswordUrlService {
     }
 
 
-    public boolean postForgotPassword(String email, HttpSession session, Model model) {
+    public boolean postForgotPassword(String email, Model model) {
         Optional<Person> byEmail = userRepository.findByEmail(email);
         if (byEmail.isPresent()) {
             String urlfooter = utilities.getForgotPasswordUrl();
