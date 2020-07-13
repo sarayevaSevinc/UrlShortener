@@ -35,9 +35,9 @@ public class PasswordUrlService {
         if (byEmail.isPresent()) {
             String urlfooter = utilities.getForgotPasswordUrl();
             while (repository.countAllByPasswordUrl(urlfooter) > 0) {
-                urlfooter = utilities.getShortUrl();
+                urlfooter = utilities.getForgotPasswordUrl();
             }
-            String resetUrl = "/resetpassword/" + utilities.getForgotPasswordUrl();
+            String resetUrl = "resetpassword/".concat(urlfooter);
             log.info(resetUrl);
             mailService.method1(email, resetUrl);
             model.addAttribute("email", email);
