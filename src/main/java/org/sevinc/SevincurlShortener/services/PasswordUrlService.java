@@ -37,7 +37,7 @@ public class PasswordUrlService {
             while (repository.countAllByPasswordUrl(urlfooter) > 0) {
                 urlfooter = utilities.getForgotPasswordUrl();
             }
-            String resetUrl = "resetpassword/".concat(urlfooter);
+            String resetUrl = "/resetpassword/".concat(urlfooter);
             log.info(resetUrl);
             mailService.method1(email, resetUrl);
             model.addAttribute("email", email);
@@ -64,8 +64,10 @@ public class PasswordUrlService {
       return   repository.findByPasswordUrl(url);
     }
     public boolean urlIsUsed(String url){
-        if(repository.findByPasswordUrl(url).isPresent())
-        return  repository.findByPasswordUrl(url).get().getUsed()==1;
+        if(repository.findByPasswordUrl(url).isPresent()) {
+            log.info(repository.findByPasswordUrl(url).toString());
+            return repository.findByPasswordUrl(url).get().getUsed() == 1;
+        }
         return false;
     }
     public  void  disableResetPasswordUrl(String url){

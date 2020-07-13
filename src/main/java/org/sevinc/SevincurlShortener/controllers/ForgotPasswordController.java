@@ -39,6 +39,7 @@ public class ForgotPasswordController {
 
     @GetMapping("/resetpassword/*")
     public String getResetPassword(HttpServletRequest request) {
+        log.info(request.getServletPath());
         return passwordUrlService.redirectResetPasswordUrl(request.getServletPath());
     }
 
