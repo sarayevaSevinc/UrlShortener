@@ -53,7 +53,7 @@
                     </thead>
                     <tr th:each="link: ${links}">
                         <td> <span th:text = "${link.createdTime}" /> </td>
-                        <td>http://localhost:8080/<span th:text = "${link.shortUrl}" /> </td>
+                        <td>https://urlshortenerappbysevinc.herokuapp.com/<span th:text = "${link.shortUrl}" /> </td>
                         <td><span th:text = "${link.longUrl}" /> </td>
                         <td><span th:text = "${link.expiresAt}" /> </td>
                         <td><form action="/urlHistoryModalWindow" method="GET">
