@@ -6,6 +6,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Slf4j
 @Configuration
@@ -27,6 +28,12 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/", "/register", "/index", "forgotPassword")
                 .not().authenticated()
                 .antMatchers("/mainpage", "/mainpage2", "/landing")
-                .authenticated();
+                .authenticated()
+                .and()
+                .logout()
+                .logoutUrl("/logout")
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
+                .deleteCookies("JSESSIONID")
+                .logoutSuccessUrl("/login");
     }
 }

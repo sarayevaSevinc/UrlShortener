@@ -17,9 +17,9 @@ public class Utilities {
         return formatter.format(dateTime);
     }
 
-    public String getExpirationDate() {
+    public String getExpirationDate(String exDate) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        LocalDateTime dateTime = LocalDateTime.now().plusYears(5);
+        LocalDateTime dateTime = LocalDateTime.now().plusMonths(Integer.valueOf(exDate));
         return formatter.format(dateTime);
     }
 
