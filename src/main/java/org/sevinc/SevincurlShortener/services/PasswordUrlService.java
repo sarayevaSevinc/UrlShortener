@@ -48,7 +48,7 @@ public class PasswordUrlService {
     }
 
     public boolean resetUserPassword(ForgotPasswordRequest form, HttpServletRequest request) {
-        String url = request.getRequestURL().toString().substring(38);
+        String url = request.getRequestURL().toString().substring(37);
         Optional<ForgotPasswordUrl> forgotPasswordUrl = repository.findByPasswordUrl(url);
         if (forgotPasswordUrl.isPresent()) {
             Person person = forgotPasswordUrl.get().getUser();
