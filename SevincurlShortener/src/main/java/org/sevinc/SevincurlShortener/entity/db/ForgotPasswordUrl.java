@@ -16,7 +16,7 @@ public class ForgotPasswordUrl {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "passwordUrl")
+    @Column(name = "passwordUrl", unique = true)
     private String passwordUrl;
 
      @Column(name = "used")

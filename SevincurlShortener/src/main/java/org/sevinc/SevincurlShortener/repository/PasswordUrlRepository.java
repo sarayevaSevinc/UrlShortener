@@ -9,5 +9,5 @@ import java.util.Optional;
 @Repository
 public interface PasswordUrlRepository extends JpaRepository<ForgotPasswordUrl, Integer> {
     Optional<ForgotPasswordUrl> findByPasswordUrl(String url);
-
+    int countAllByPasswordUrl(String passwordUrl);
 }

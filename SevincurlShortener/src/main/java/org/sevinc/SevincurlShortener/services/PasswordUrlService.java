@@ -33,6 +33,10 @@ public class PasswordUrlService {
     public boolean postForgotPassword(String email, HttpSession session, Model model) {
         Optional<Person> byEmail = userRepository.findByEmail(email);
         if (byEmail.isPresent()) {
+            String urlfooter = utilities.getForgotPasswordUrl();
+            while (repository.countAllByPasswordUrl(urlfooter) > 0) {
+                urlfooter = utilities.getShortUrl();
+            }
             String resetUrl = "/resetpassword/" + utilities.getForgotPasswordUrl();
             log.info(resetUrl);
             mailService.method1(email, resetUrl);

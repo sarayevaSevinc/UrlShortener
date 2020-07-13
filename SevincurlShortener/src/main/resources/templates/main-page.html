@@ -32,7 +32,6 @@
         </div>
     </header>
     <main class="full-url-bg-container">
-        <img class="full-url-img" src="/img/full-url-robot.png" alt="flying robot">
         <div class="full-url-container">
             <h2 class="full-url-title">ENTER YOUR FULL URL</h2>
             <form action="/mainpage" class="full-url-input-container" method="POST">
@@ -53,7 +52,7 @@
                     </thead>
                     <tr th:each="link: ${links}">
                         <td> <span th:text = "${link.createdTime}" /> </td>
-                        <td>http://localhost:8080/<span th:text = "${link.shortUrl}" /> </td>
+                        <td>https://urlshortenerappbysevinc.herokuapp.com/<span th:text = "${link.shortUrl}" /> </td>
                         <td><span th:text = "${link.longUrl}" /> </td>
                         <td><span th:text = "${link.expiresAt}" /> </td>
                         <td><form action="/urlHistoryModalWindow" method="GET">
