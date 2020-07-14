@@ -14,5 +14,7 @@ Then the user hits the "SHORTEN" button, and a unique short link has been create
 That short link will be available for everyone from then.
 When that short link has been requested, the server will redirect this request to the original URL. 
 Every user can see his/her links visited history ( Visited Date, visited Time, IP address) and enable/disable it.
+
 The project deployed to the Heroku.
+
 Link: https://short-urlapp.herokuapp.com
