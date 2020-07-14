@@ -53,7 +53,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
                     </thead>
                     <tr th:each="link: ${links}">
                         <td> <span th:text = "${link.createdTime}" /> </td>
-                        <td>http://localhost:8080/<span th:text = "${link.shortUrl}" /> </td>
+                        <td>https://short-urlapp.herokuapp.com/<span th:text = "${link.shortUrl}" /> </td>
                         <td><span th:text = "${link.longUrl}" />
                         </td>
                         <td>  <a th:href="'/history/' + ${link.id}"><span th:text = "${link.visitedCount}" /> </a>  <img class="full-url-arrow" src="/img/full-url-arrow.png" ></td>
