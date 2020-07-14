@@ -34,6 +34,6 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutUrl("/logout")
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
                 .deleteCookies("JSESSIONID")
-                .logoutSuccessUrl("/login");
+                .logoutSuccessUrl("/index");
     }
 }

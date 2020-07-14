@@ -23,14 +23,17 @@ public class UrlHistory {
 
     @Column(name = "date")
     private String date;
+
     @Column(name = "time")
     private String time;
+
     @Column(name = "ip")
     private String ip;
 
     @ManyToOne
     @JoinColumn(name = "urlid")
     private Url url;
+
     @ManyToOne
     @JoinColumn(name = "personid")
     private Person person;

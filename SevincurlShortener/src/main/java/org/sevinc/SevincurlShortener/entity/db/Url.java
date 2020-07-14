@@ -25,7 +25,6 @@ public class Url {
     @Column(name = "shortUrl", unique = true)
     private String shortUrl;
 
-
     @Column(name = "visitedCount")
     private long visitedCount;
 
