@@ -10,7 +10,6 @@ import org.sevinc.SevincurlShortener.utilities.Utilities;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
 @Log4j2
@@ -76,7 +75,6 @@ public class PasswordUrlService {
         repository.save(byUrl.get());
     }
     public String redirectResetPasswordUrl(String url){
-        log.info(url);
         if(urlIsUsed(url)) return "forgot-password";
         disableResetPasswordUrl(url);
         return "reset-password";
