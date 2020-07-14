@@ -29,7 +29,7 @@ public class UrlService {
         this.repository.save(url);
     }
 
-    public void createAndSaveNewUrl(String longUrl, PersonDetails personDetails) {
+    public void createAndSaveNewUrl(String longUrl, String exDate, PersonDetails personDetails) {
         if (utilities.isValid(longUrl)) {
 
             String shortUrl = utilities.getShortUrl();
@@ -40,7 +40,7 @@ public class UrlService {
             save(new Url(longUrl, shortUrl,
                     utilities.getDate(),
                     utilities.mapperPersonDetailsToUser(personDetails),
-                    utilities.getExpirationDate(), Short.valueOf("1")));
+                    utilities.getExpirationDate(exDate), Short.valueOf("1")));
         }
     }
 

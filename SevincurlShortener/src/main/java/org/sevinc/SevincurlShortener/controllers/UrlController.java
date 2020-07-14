@@ -35,8 +35,8 @@ public class UrlController {
     }
 
     @PostMapping("/mainpage")
-    public RedirectView postMainPage(@RequestParam String longUrl, Authentication auth) {
-        service.createAndSaveNewUrl(longUrl, (PersonDetails) auth.getPrincipal());
+    public RedirectView postMainPage(@RequestParam String longUrl,@RequestParam(defaultValue = "60") String exDate, Authentication auth) {
+        service.createAndSaveNewUrl(longUrl, exDate, (PersonDetails) auth.getPrincipal());
         return new RedirectView("/mainpage");
     }
 

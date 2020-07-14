@@ -32,14 +32,15 @@ public class ForgotPasswordController {
     }
 
     @PostMapping("/forgotPassword")
-    public String postForgotPassword(@RequestParam String email, HttpSession session, Model model) {
-        return passwordUrlService.postForgotPassword(email, session, model) ? "successForgotPasswordPage"
-                : "forgot-Password";
+    public String postForgotPassword(@RequestParam String email, Model model) {
+        return passwordUrlService.postForgotPassword(email,  model) ? "successForgotPasswordPage"
+                : "forgot-password";
     }
 
     @GetMapping("/resetpassword/*")
     public String getResetPassword(HttpServletRequest request) {
-        return passwordUrlService.redirectResetPasswordUrl(request.getRequestURL().toString().substring(21));
+        log.info(request.getServletPath());
+        return passwordUrlService.redirectResetPasswordUrl(request.getServletPath());
     }
 
     @PostMapping("/resetpassword/*")

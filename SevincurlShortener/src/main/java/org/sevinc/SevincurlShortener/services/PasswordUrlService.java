@@ -30,14 +30,14 @@ public class PasswordUrlService {
     }
 
 
-    public boolean postForgotPassword(String email, HttpSession session, Model model) {
+    public boolean postForgotPassword(String email, Model model) {
         Optional<Person> byEmail = userRepository.findByEmail(email);
         if (byEmail.isPresent()) {
             String urlfooter = utilities.getForgotPasswordUrl();
             while (repository.countAllByPasswordUrl(urlfooter) > 0) {
-                urlfooter = utilities.getShortUrl();
+                urlfooter = utilities.getForgotPasswordUrl();
             }
-            String resetUrl = "/resetpassword/" + utilities.getForgotPasswordUrl();
+            String resetUrl = "/resetpassword/".concat(urlfooter);
             log.info(resetUrl);
             mailService.method1(email, resetUrl);
             model.addAttribute("email", email);
@@ -48,11 +48,11 @@ public class PasswordUrlService {
     }
 
     public boolean resetUserPassword(ForgotPasswordRequest form, HttpServletRequest request) {
-        String url = request.getRequestURL().toString().substring(21);
+        String url = request.getServletPath();
         Optional<ForgotPasswordUrl> forgotPasswordUrl = repository.findByPasswordUrl(url);
         if (forgotPasswordUrl.isPresent()) {
             Person person = forgotPasswordUrl.get().getUser();
-            if (form.getFullName().equals(person.getFullName()) && form.getPassword().equals(form.getPasswordAgain())) {
+            if (form.getPassword().equals(form.getPasswordAgain())) {
                 userService.resetPassword(person, form.getPassword(), url, forgotPasswordUrl.get());
                 return true;
             }
@@ -64,8 +64,10 @@ public class PasswordUrlService {
       return   repository.findByPasswordUrl(url);
     }
     public boolean urlIsUsed(String url){
-        if(repository.findByPasswordUrl(url).isPresent())
-        return  repository.findByPasswordUrl(url).get().getUsed()==1;
+        if(repository.findByPasswordUrl(url).isPresent()) {
+            log.info(repository.findByPasswordUrl(url).toString());
+            return repository.findByPasswordUrl(url).get().getUsed() == 1;
+        }
         return false;
     }
     public  void  disableResetPasswordUrl(String url){

@@ -14,7 +14,7 @@
 </head>
 <!--The modal windows are commented down below-->
 
-<body>
+<body style="overflow-x: hidden">
     <header class="main-header">
         <a href="main-page.html" class="main-header-logo"><img src="/img/iba-tech-logo-white.svg"
                 alt="IBA Tech Academy"></a>
@@ -37,6 +37,18 @@
             <form action="/mainpage" class="full-url-input-container" method="POST">
                 <input class="full-url-input" type="text" name="longUrl" placeholder="Enter your URL">
                 <input type="submit" class="full-url-btn" value="SHORTEN"/>
+                <select id="exDate" name="exDate" style="width: 15%; height: 60px;
+                  border-radius: 15px;
+                  border: 1px solid #BDBDBD;">
+                    <option value="60"> 5 Year </option>
+                    <option value="1"> 1 Month </option>
+                    <option value="3"> 3 Month </option>
+                    <option value="6"> 6 Month </option>
+                    <option value="12"> 12 Month </option>
+                    <option value="18"> 18 Month </option>
+                    <option value="36"> 36 Month </option>
+
+                </select>
             </form>
 
             <table class="full-url-table" style="z-index: 400">
