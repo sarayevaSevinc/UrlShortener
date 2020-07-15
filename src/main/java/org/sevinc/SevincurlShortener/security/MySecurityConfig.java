@@ -25,7 +25,7 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(HttpMethod.GET,"/css/**", "/js/**", "/img/**")
                 .permitAll()
-                .antMatchers("/", "/register", "/index", "forgotPassword")
+                .antMatchers("/", "/register", "/index", "/forgotPassword")
                 .not().authenticated()
                 .antMatchers("/mainpage", "/urlHistoryModalWindow*", "/landing")
                 .authenticated()

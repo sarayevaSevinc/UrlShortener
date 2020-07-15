@@ -12,7 +12,7 @@ public class MailService {
         this.mailSender = mailSender;
     }
 
-    public void method1(String email, String link) {
+    public void sendEmail(String email, String link) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("UrlShortenerAppBySevinc");
         message.setTo(email);

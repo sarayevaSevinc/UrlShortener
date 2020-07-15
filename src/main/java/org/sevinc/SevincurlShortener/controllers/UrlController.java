@@ -29,7 +29,6 @@ public class UrlController {
     public String getMainPage(Model model, Authentication auth) {
         PersonDetails principal = (PersonDetails) auth.getPrincipal();
         model.addAttribute("links", service.getAllByUserId(principal.getId()));
-        model.addAttribute("hidden", "hidden");
         model.addAttribute("name", principal.getFullName());
         return "main-page";
     }

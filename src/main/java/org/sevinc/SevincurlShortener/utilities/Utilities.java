@@ -64,7 +64,6 @@ public class Utilities {
         return new Person(personDetails.getId(), personDetails.getFullName(),
                 personDetails.getEmail(), personDetails.getPassword());
     }
-
     public boolean isValid(String url) {
         try {
             new URL(url).toURI();

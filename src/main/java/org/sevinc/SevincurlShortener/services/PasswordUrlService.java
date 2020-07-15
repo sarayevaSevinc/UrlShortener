@@ -37,8 +37,7 @@ public class PasswordUrlService {
                 urlfooter = utilities.getForgotPasswordUrl();
             }
             String resetUrl = "/resetpassword/".concat(urlfooter);
-            log.info(resetUrl);
-            mailService.method1(email, resetUrl);
+            mailService.sendEmail(email, resetUrl);
             model.addAttribute("email", email);
             repository.save(new ForgotPasswordUrl(resetUrl, Short.valueOf("0"), byEmail.get()));
             return true;
