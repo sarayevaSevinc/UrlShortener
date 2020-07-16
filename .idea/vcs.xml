@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/SevincurlShortener" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/SevincurlShortener/UrlShortener" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/SevincurlShortener/short-urlapp" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/short-urlapp" vcs="Git" />
+  </component>
+</project>
