@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/SevincurlShortener/SevincurlShortener.iml" filepath="$PROJECT_DIR$/SevincurlShortener/SevincurlShortener.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SevincurlShortener.iml" filepath="$PROJECT_DIR$/SevincurlShortener.iml" />
     </modules>
   </component>
 </project>
