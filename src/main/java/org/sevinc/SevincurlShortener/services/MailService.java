@@ -18,7 +18,7 @@ public class MailService {
         message.setTo(email);
         message.setSubject("Password Reset Link");
         message.setText("Hi!  Welcome back to UrlShortenerAppBySevinc! " +
-                "You can reset your password with this link! " + "urlshortenerappbysevinc.herokuapp.com".concat(link)
+                "You can reset your password with this link! " + "short-urlapp.herokuapp.com".concat(link)
                 .concat("\n Sincerely, UrlShortenerApp!"));
 
         mailSender.send(message);

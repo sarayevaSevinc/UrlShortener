@@ -1,0 +1,89 @@
+.main-header {
+    background-color: #00298F;
+}
+
+.log-out-block {
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 7px 21px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: .5s;
+}
+
+.log-out-btn {
+    text-decoration: none;
+    color: #828282;
+    margin-left: 8px;
+}
+
+.log-out-block:hover {
+    box-shadow: 7px 7px 10px rgb(37, 36, 36);
+}
+
+.main-header-profile-credentials {
+    border-bottom: 0;
+    text-align: center;
+    margin-bottom: 0;
+}
+
+.main-header-username {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.short-url-container {
+    background-image: url('../img/short-url-bg.png');
+    height: 90vh;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    overflow: hidden;
+}
+
+.short-url-img {
+    width: 45vw;
+    padding-left: 200px;
+    transform: scale(1.5);
+}
+
+.short-url-content {
+    padding-right: 130px;
+    width: 55vw;
+    text-align: right;
+    font-family: 'Roboto', sans-serif;
+}
+
+.short-url-title {
+    font-size: 96px;
+    color: #333333;
+    margin-bottom: 20px;
+}
+
+.short-url-text {
+    font-size: 24px;
+    color: #4E535B;
+    margin-bottom: 50px;
+}
+
+.short-url-btn {
+    font-weight: 500;
+    font-size: 27px;
+    color: #FFFFFF;
+    text-decoration: none;
+    text-transform: uppercase;
+    background: #00298F;
+    border-radius: 10px;
+    padding: 15px 50px;
+    transition: .5s;
+}
+
+.short-url-btn:hover {
+    box-shadow: 5px 7px 10px rgb(37, 36, 36);
+}
