@@ -9,20 +9,23 @@ import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
 public class Utilities {
-    DateTimeFormatter formatterDate = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    DateTimeFormatter formatterDateAndTime = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
 
     public String getDate() {
-        return formatterDate.format(LocalDateTime.now());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDateTime dateTime = LocalDateTime.now();
+        return formatter.format(dateTime);
     }
 
     public String getExpirationDate(String exDate) {
-        return formatterDateAndTime.format(LocalDateTime.now()
-                .plusMonths(Integer.valueOf(exDate)));
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime dateTime = LocalDateTime.now().plusMonths(Integer.valueOf(exDate));
+        return formatter.format(dateTime);
     }
 
     public LocalDateTime parseExpirationDate(String date) {
-        return LocalDateTime.from(formatterDateAndTime.parse(date));
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        return LocalDateTime.from(formatter.parse(date));
     }
 
     public String getTime() {
@@ -32,6 +35,7 @@ public class Utilities {
     }
 
     public String getShortUrl() {
+
         return UUID.randomUUID().toString().substring(0, 6);
     }
 
@@ -61,9 +65,9 @@ public class Utilities {
     }
 
     public Person mapperPersonDetailsToUser(PersonDetails personDetails) {
-        return new Person(personDetails.getId(), personDetails.getFullName(),
-                personDetails.getEmail(), personDetails.getPassword());
+        return new Person(personDetails.getId(), personDetails.getFullName(), personDetails.getEmail(), personDetails.getPassword());
     }
+
     public boolean isValid(String url) {
         try {
             new URL(url).toURI();

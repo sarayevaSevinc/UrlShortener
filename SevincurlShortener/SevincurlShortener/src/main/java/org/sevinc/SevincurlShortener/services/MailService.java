@@ -12,13 +12,13 @@ public class MailService {
         this.mailSender = mailSender;
     }
 
-    public void sendEmail(String email, String link) {
+    public void method1(String email, String link) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("UrlShortenerAppBySevinc");
         message.setTo(email);
         message.setSubject("Password Reset Link");
         message.setText("Hi!  Welcome back to UrlShortenerAppBySevinc! " +
-                "You can reset your password with this link! " + "https://short-urlapp.herokuapp.com".concat(link)
+                "You can reset your password with this link! " + "urlshortenerappbysevinc.herokuapp.com".concat(link)
                 .concat("\n Sincerely, UrlShortenerApp!"));
 
         mailSender.send(message);

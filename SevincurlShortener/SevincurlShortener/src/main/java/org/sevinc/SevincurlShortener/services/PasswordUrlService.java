@@ -10,6 +10,7 @@ import org.sevinc.SevincurlShortener.utilities.Utilities;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
 @Log4j2
@@ -37,7 +38,8 @@ public class PasswordUrlService {
                 urlfooter = utilities.getForgotPasswordUrl();
             }
             String resetUrl = "/resetpassword/".concat(urlfooter);
-            mailService.sendEmail(email, resetUrl);
+            log.info(resetUrl);
+            mailService.method1(email, resetUrl);
             model.addAttribute("email", email);
             repository.save(new ForgotPasswordUrl(resetUrl, Short.valueOf("0"), byEmail.get()));
             return true;
@@ -74,6 +76,7 @@ public class PasswordUrlService {
         repository.save(byUrl.get());
     }
     public String redirectResetPasswordUrl(String url){
+        log.info(url);
         if(urlIsUsed(url)) return "forgot-password";
         disableResetPasswordUrl(url);
         return "reset-password";
