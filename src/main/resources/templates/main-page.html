@@ -64,7 +64,7 @@
                     </thead>
                     <tr th:each="link: ${links}">
                         <td> <span th:text = "${link.createdTime}" /> </td>
-                        <td><a href="https://short-urlapp.herokuapp.com/<span th:text =${link.shortUrl}" /> https://short-urlapp.herokuapp.com/<span th:text = "${link.shortUrl}" /> </td>
+                        <td><a href="@{https://short-urlapp.herokuapp.com/<span th:text =${link.shortUrl}}" /> https://short-urlapp.herokuapp.com/<span th:text = "${link.shortUrl}" /> </td>
 
                         <td><span th:text = "${link.longUrl}" /> </td>
                         <td><span th:text = "${link.expiresAt}" /> </td>
