@@ -8,6 +8,8 @@ import org.sevinc.SevincurlShortener.repository.UrlHistoryRepository;
 import org.sevinc.SevincurlShortener.repository.UrlRepository;
 import org.sevinc.SevincurlShortener.utilities.Utilities;
 import org.springframework.stereotype.Service;
+
+import java.io.File;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -79,7 +81,6 @@ public class UrlService {
         }
         return "/exception";
     }
-
 
     private boolean isValidUrl(Url url) {
         LocalDateTime expirationDateTime = utilities.parseExpirationDate(url.getExpiresAt());
