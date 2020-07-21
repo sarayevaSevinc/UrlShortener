@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tinder: full url</title>
+    <title>MainPage</title>
     <link rel="stylesheet" href="/css/user-profile.css">
     <link rel="stylesheet" href="/css/short-url.css">
     <link rel="stylesheet" href="/css/full-url.css">
@@ -64,8 +64,8 @@
                     </thead>
                     <tr th:each="link: ${links}">
                         <td> <span th:text = "${link.createdTime}" /> </td>
-                        <td><a href="https://short-urlapp.herokuapp.com/<span th:text =${link.shortUrl}" /> https://short-urlapp.herokuapp.com/<span th:text = "${link.shortUrl}" /> </td>
-                        
+                        <td><a th:href="@{'https://short-urlapp.herokuapp.com/'+${link.shortUrl}}" /> https://short-urlapp.herokuapp.com/<span th:text = "${link.shortUrl}" /> </td>
+
                         <td><span th:text = "${link.longUrl}" /> </td>
                         <td><span th:text = "${link.expiresAt}" /> </td>
                         <td><form action="/urlHistoryModalWindow" method="GET">

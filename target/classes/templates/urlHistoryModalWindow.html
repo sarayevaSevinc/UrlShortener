@@ -9,7 +9,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tinder: full url</title>
+    <title>UrlShortener:  history</title>
     <link rel="stylesheet" href="/css/user-profile.css">
     <link rel="stylesheet" href="/css/short-url.css">
     <link rel="stylesheet" href="/css/full-url.css">
@@ -34,35 +34,60 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
         </div>
     </header>
     <main class="full-url-bg-container">
-        <img class="full-url-img" src="/img/full-url-robot.png" alt="flying robot">
         <div class="full-url-container">
             <h2 class="full-url-title">ENTER YOUR FULL URL</h2>
             <form action="/mainpage" class="full-url-input-container" method="POST">
                 <input class="full-url-input" type="text" name="longUrl" placeholder="Enter your URL">
                 <input type="submit" class="full-url-btn" value="SHORTEN"/>
+                <select id="exDate" name="exDate" style="width: 15%; height: 60px;
+                  border-radius: 15px;
+                  border: 1px solid #BDBDBD;">
+                    <option value="60"> 5 Year </option>
+                    <option value="1"> 1 Month </option>
+                    <option value="3"> 3 Month </option>
+                    <option value="6"> 6 Month </option>
+                    <option value="12"> 12 Month </option>
+                    <option value="18"> 18 Month </option>
+                    <option value="36"> 36 Month </option>
+
+                </select>
             </form>
 
             <table class="full-url-table" style="z-index: 400">
                 <tbody>
-                <tr >
-                    <thead >
-                        <th>Creation date</th>
-                        <th>Short URL</th>
-                        <th>Full URL</th>
-                        <th>Visit count</th>
-                    </thead>
-                    <tr th:each="link: ${links}">
-                        <td> <span th:text = "${link.createdTime}" /> </td>
-                        <td>https://short-urlapp.herokuapp.com/<span th:text = "${link.shortUrl}" /> </td>
-                        <td><span th:text = "${link.longUrl}" />
-                        </td>
-                        <td>  <a th:href="'/history/' + ${link.id}"><span th:text = "${link.visitedCount}" /> </a>  <img class="full-url-arrow" src="/img/full-url-arrow.png" ></td>
+                <tr>
+                <thead>
+                <th>Creation Date</th>
+                <th>Short URL</th>
+                <th>Full URL</th>
+                <th>Exp Time</th>
+                <th>Visit Count</th>
+                <th>Enabled</th>
+                </thead>
+                <tr th:each="link: ${links}">
+                    <td> <span th:text = "${link.createdTime}" /> </td>
+                    <td><a th:href="@{/(url=${link.shortUrl})}" /> https://short-urlapp.herokuapp.com/<span th:text = "${link.shortUrl}" /> </td>
 
-                        <!--<form   th:action="@{/history/(id=${link.id})}">
-                        <td> <input type="submit" th:value="${link.visitedCount}" >  </td>
-                        </form>
-                        -->
-                    </tr>
+                    <td><span th:text = "${link.longUrl}" /> </td>
+                    <td><span th:text = "${link.expiresAt}" /> </td>
+                    <td><form action="/urlHistoryModalWindow" method="GET">
+                        <input type="hidden" th:value="${link.id}" name="id" id="id"/>
+                        <input type="submit" name="submit" th:value="${link.visitedCount}"/>
+                    </form> </td>
+                    <td> <form action="/updateEnabled" method="POST">
+                        <input type="hidden" th:value="${link.id}" name="id" id="id"/>
+                        <input type="checkbox" name="enabled" th:checked="${link.enabled}"   onchange="this.form.submit()"/>
+                    </form>
+
+                    </td>
+
+                    <!--<td>  <a href="/mainpage2"><span th:text = "${link.visitedCount}" /> </a>  <img class="full-url-arrow" src="/img/full-url-arrow.png" ></td>
+-->
+                    <!--<form   th:action="@{/history/(id=${link.id})}">
+                    <td> <input type="submit" th:value="${link.visitedCount}" >  </td>
+                    </form>
+                    -->
+                </tr>
 
 
             </table>
