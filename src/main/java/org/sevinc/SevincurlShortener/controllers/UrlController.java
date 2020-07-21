@@ -54,6 +54,7 @@ public class UrlController {
     public String postUrlHistory(@RequestParam int id, Model model, Authentication authentication) {
         PersonDetails person = (PersonDetails) authentication.getPrincipal();
         model.addAttribute("links", service.getAllByUserId(person.getId()));
+        model.addAttribute("name", person.getFullName());
         model.addAttribute("histories", urlHistoryService.getAllByUrlIdAndUserId(id, person.getId()));
         log.info(id);
         return "urlHistoryModalWindow";

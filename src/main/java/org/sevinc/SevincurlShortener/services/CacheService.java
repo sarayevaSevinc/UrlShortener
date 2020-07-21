@@ -1,5 +1,6 @@
 package org.sevinc.SevincurlShortener.services;
 
+import lombok.extern.log4j.Log4j2;
 import org.sevinc.SevincurlShortener.entity.db.Url;
 import org.sevinc.SevincurlShortener.repository.CacheRepository;
 import org.sevinc.SevincurlShortener.utilities.Utilities;
@@ -9,6 +10,7 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Optional;
 
+@Log4j2
 @Service
 public class CacheService {
     private final CacheRepository cacheRepository;
@@ -24,7 +26,9 @@ public class CacheService {
             cacheRepository.remove(cacheRepository.getFirstInUrlId());
         cacheRepository.add(url);
     }
+
     public Optional<Url> getUrlByShortUrl (String shortUrl){
+        log.info("I am in the CacheService...");
         return cacheRepository.searchWithShortUrl(shortUrl);
     }
     public void updateUrl (Url url){

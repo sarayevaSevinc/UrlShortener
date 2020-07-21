@@ -23,7 +23,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
         <div class="main-header-wrapper">
             <div class="main-header-profile-wrapper">
                 <div class="main-header-profile-credentials">
-                    <span class="main-header-username">Anatolii Safronov</span>
+                    <span class="main-header-username"><span th:text="${name}"/> </span>
                     <div class="log-out-block">
                         <img src="/img/log-out-icon.svg" alt="Log out">
                         <a href="/logout" class="log-out-btn">Log out</a>

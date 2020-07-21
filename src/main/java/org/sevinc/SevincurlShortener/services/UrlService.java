@@ -60,8 +60,9 @@ public class UrlService {
 
 
     public List<Url> getAllByUserId(int id) {
-
-        return this.repository.findAllByUserId(id);
+          List<Url> urlById = this.repository.findAllByUserId(id);
+        Collections.reverse(urlById);
+        return urlById;
     }
 
     public void updateEnabled(int id, boolean enabled, PersonDetails personDetails) {
@@ -84,6 +85,7 @@ public class UrlService {
     }
 
     public String redirectUrl(String value, String address) {
+        log.info("I am here in the UrlService..");
         Optional<Url> optionalUrl = cacheService.getUrlByShortUrl(value);
         optionalUrl = optionalUrl.isPresent()? optionalUrl : findByShortUrl(value);
         if (optionalUrl.isPresent()) {
