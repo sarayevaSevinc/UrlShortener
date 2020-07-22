@@ -116,7 +116,7 @@ public class UrlService {
         return true;
     }
 
-    @Scheduled(fixedRate = 87000000)
+    @Scheduled(fixedRate = 3600000)
     public void deleteExpiredUrls() {
         List<Url> collect = repository.findAll().stream().filter(x -> utilities.parseExpirationDate(x.getExpiresAt()).isAfter(LocalDateTime.now().plusMonths(1))).collect(Collectors.toList());
         repository.saveAll(collect);

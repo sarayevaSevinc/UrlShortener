@@ -22,7 +22,7 @@ public class CacheService {
     }
 
     public void add(Url url) {
-        if (cacheRepository.getSizeOfCache() == 20000)
+        if (cacheRepository.getSizeOfCache() == 2000000)
             cacheRepository.remove(cacheRepository.getFirstInUrlId());
         cacheRepository.add(url);
     }
