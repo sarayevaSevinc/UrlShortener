@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import javax.servlet.http.HttpServletRequest;
 
 @Log4j2
@@ -32,7 +33,7 @@ public class ForgotPasswordController {
 
     @PostMapping("/forgotPassword")
     public String postForgotPassword(@RequestParam String email, Model model) {
-        return passwordUrlService.postForgotPassword(email,  model) ? "successForgotPasswordPage"
+        return passwordUrlService.postForgotPassword(email, model) ? "successForgotPasswordPage"
                 : "forgot-password";
     }
 
@@ -44,7 +45,7 @@ public class ForgotPasswordController {
 
     @PostMapping("/resetpassword/*")
     public String postResetPassword(ForgotPasswordRequest form, Model model, HttpServletRequest request) {
-        if (passwordUrlService.resetUserPassword(form,  request)) return "index";
+        if (passwordUrlService.resetUserPassword(form, request)) return "index";
         model.addAttribute("ex", "Informations are not true. Please, try again");
         return "reset-password";
     }

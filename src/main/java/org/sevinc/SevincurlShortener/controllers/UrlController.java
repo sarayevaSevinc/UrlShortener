@@ -1,4 +1,5 @@
 package org.sevinc.SevincurlShortener.controllers;
+
 import lombok.extern.log4j.Log4j2;
 import org.sevinc.SevincurlShortener.entity.PersonDetails;
 import org.sevinc.SevincurlShortener.services.UrlHistoryService;
@@ -34,7 +35,7 @@ public class UrlController {
     }
 
     @PostMapping("/mainpage")
-    public RedirectView postMainPage(@RequestParam String longUrl,@RequestParam(defaultValue = "60") String exDate, Authentication auth) {
+    public RedirectView postMainPage(@RequestParam String longUrl, @RequestParam(defaultValue = "60") String exDate, Authentication auth) {
         service.createAndSaveNewUrl(longUrl, exDate, (PersonDetails) auth.getPrincipal());
         return new RedirectView("/mainpage");
     }
@@ -45,7 +46,7 @@ public class UrlController {
     }
 
     @PostMapping("/updateEnabled")
-    public RedirectView updateEnabled(@RequestParam int id, @RequestParam(defaultValue = "false") boolean enabled, Authentication auth){
+    public RedirectView updateEnabled(@RequestParam int id, @RequestParam(defaultValue = "false") boolean enabled, Authentication auth) {
         service.updateEnabled(id, enabled, (PersonDetails) auth.getPrincipal());
         return new RedirectView("/mainpage");
     }
@@ -56,6 +57,7 @@ public class UrlController {
         model.addAttribute("links", service.getAllByUserId(person.getId()));
         model.addAttribute("name", person.getFullName());
         model.addAttribute("histories", urlHistoryService.getAllByUrlIdAndUserId(id, person.getId()));
+        model.addAttribute("shortlink", "https://short-urlapp.herokuapp.com/".concat(service.getUrlById(id).getShortUrl()));
         log.info(id);
         return "urlHistoryModalWindow";
     }

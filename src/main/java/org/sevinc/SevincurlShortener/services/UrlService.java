@@ -1,5 +1,6 @@
 package org.sevinc.SevincurlShortener.services;
 
+import eu.bitwalker.useragentutils.UserAgent;
 import lombok.extern.log4j.Log4j2;
 import org.sevinc.SevincurlShortener.entity.PersonDetails;
 import org.sevinc.SevincurlShortener.entity.db.Person;
@@ -14,6 +15,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -24,7 +26,7 @@ import java.util.stream.Collectors;
 @Service
 @Component
 public class UrlService {
-     private HashMap <Person, Url> cache = new HashMap<>();
+    private HashMap<Person, Url> cache = new HashMap<>();
     private UrlRepository repository;
     private Utilities utilities;
     private UrlHistoryRepository urlHistoryRepository;
@@ -34,7 +36,7 @@ public class UrlService {
         this.repository = repository;
         utilities = new Utilities();
         this.urlHistoryRepository = urlHistoryRepository;
-        this.cacheService =cacheService;
+        this.cacheService = cacheService;
     }
 
     public void save(Url url) {
@@ -60,7 +62,7 @@ public class UrlService {
 
 
     public List<Url> getAllByUserId(int id) {
-          List<Url> urlById = this.repository.findAllByUserId(id);
+        List<Url> urlById = this.repository.findAllByUserId(id);
         Collections.reverse(urlById);
         return urlById;
     }
@@ -81,19 +83,22 @@ public class UrlService {
     }
 
     public Optional<Url> findByShortUrl(String shortUrl) {
+        log.info(" i am here in db for search short url");
         return this.repository.findByShortUrl(shortUrl);
     }
 
-    public String redirectUrl(String value, String address) {
+    public String redirectUrl(String value, HttpServletRequest request) {
         log.info("I am here in the UrlService..");
         Optional<Url> optionalUrl = cacheService.getUrlByShortUrl(value);
-        optionalUrl = optionalUrl.isPresent()? optionalUrl : findByShortUrl(value);
+        optionalUrl = optionalUrl.isPresent() ? optionalUrl : findByShortUrl(value);
+        UserAgent userAgent = UserAgent.parseUserAgentString(request.getHeader("User-Agent"));
         if (optionalUrl.isPresent()) {
             Url url = optionalUrl.get();
             if (isValidUrl(url)) {
                 increaseVisitedCount(url);
                 urlHistoryRepository.save(new UrlHistory(utilities.getDate(),
-                        utilities.getTime(), address, url, url.getUser()));
+                        utilities.getTime(), request.getRemoteAddr(), userAgent.getOperatingSystem().getName(),
+                        userAgent.getBrowser().getName(), userAgent.getBrowserVersion().getVersion(), url, url.getUser()));
                 return url.getLongUrl();
             }
         }
@@ -112,9 +117,13 @@ public class UrlService {
     }
 
     @Scheduled(fixedRate = 87000000)
-    public void deleteExpiredUrls(){
+    public void deleteExpiredUrls() {
         List<Url> collect = repository.findAll().stream().filter(x -> utilities.parseExpirationDate(x.getExpiresAt()).isAfter(LocalDateTime.now().plusMonths(1))).collect(Collectors.toList());
-             repository.saveAll(collect);
-             cacheService.deleteExpiredUrls();
+        repository.saveAll(collect);
+        cacheService.deleteExpiredUrls();
+    }
+
+    public Url getUrlById(int id) {
+        return repository.findById(id).get();
     }
 }

@@ -19,12 +19,12 @@ public class ForgotPasswordUrl {
     @Column(name = "passwordUrl", unique = true)
     private String passwordUrl;
 
-     @Column(name = "used")
-     private Short used;
+    @Column(name = "used")
+    private Short used;
 
-     @ManyToOne
-     @JoinColumn(name = "userid")
-      private Person user;
+    @ManyToOne
+    @JoinColumn(name = "userid")
+    private Person user;
 
 
     public ForgotPasswordUrl(String passwordUrl, Short used, Person person) {

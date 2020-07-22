@@ -21,25 +21,28 @@ public class CacheService {
         utilities = new Utilities();
     }
 
-    public void add (Url url) {
-        if(cacheRepository.getSizeOfCache()==20000)
+    public void add(Url url) {
+        if (cacheRepository.getSizeOfCache() == 20000)
             cacheRepository.remove(cacheRepository.getFirstInUrlId());
         cacheRepository.add(url);
     }
 
-    public Optional<Url> getUrlByShortUrl (String shortUrl){
+    public Optional<Url> getUrlByShortUrl(String shortUrl) {
         log.info("I am in the CacheService...");
         return cacheRepository.searchWithShortUrl(shortUrl);
     }
-    public void updateUrl (Url url){
+
+    public void updateUrl(Url url) {
         cacheRepository.update(url);
     }
-    public HashMap<Integer, Url> getAll(){
+
+    public HashMap<Integer, Url> getAll() {
         return cacheRepository.getAll();
     }
-    public  void deleteExpiredUrls(){
+
+    public void deleteExpiredUrls() {
         for (Url url : cacheRepository.getAll().values()) {
-            if(utilities.parseExpirationDate(url.getExpiresAt()).isAfter(LocalDateTime.now().plusMonths(1)))
+            if (utilities.parseExpirationDate(url.getExpiresAt()).isAfter(LocalDateTime.now().plusMonths(1)))
                 cacheRepository.remove(url.getId());
         }
     }

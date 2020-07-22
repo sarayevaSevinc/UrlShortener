@@ -64,9 +64,9 @@
                     </thead>
                     <tr th:each="link: ${links}">
                         <td> <span th:text = "${link.createdTime}" /> </td>
-                        <td><a th:href="@{'https://short-urlapp.herokuapp.com/'+${link.shortUrl}}" /> https://short-urlapp.herokuapp.com/<span th:text = "${link.shortUrl}" /> </td>
+                        <td><a target="_blank" th:href="@{'https://short-urlapp.herokuapp.com/'+${link.shortUrl}}" /> https://short-urlapp.herokuapp.com/<span th:text = "${link.shortUrl}" /> </td>
+                        <td><a target="_blank" th:href="@{${link.longUrl}}" /><span th:text = "${link.longUrl}" /> </td>
 
-                        <td><span th:text = "${link.longUrl}" /> </td>
                         <td><span th:text = "${link.expiresAt}" /> </td>
                         <td><form action="/urlHistoryModalWindow" method="GET">
                             <input type="hidden" th:value="${link.id}" name="id" id="id"/>

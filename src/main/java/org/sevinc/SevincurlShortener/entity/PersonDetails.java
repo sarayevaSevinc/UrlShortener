@@ -3,6 +3,7 @@ package org.sevinc.SevincurlShortener.entity;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -27,10 +28,12 @@ public class PersonDetails implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;
     }
+
     @Override
     public String toString() {
         return String.format("XUserDetails[%d:'%s':'%s':'%s']", id, fullName, email, password);
     }
+
     @Override
     public String getPassword() {
         return password;

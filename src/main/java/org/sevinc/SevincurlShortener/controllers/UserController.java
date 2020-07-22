@@ -43,7 +43,7 @@ public class UserController {
     @GetMapping("/landing")
     public String getLanding(Authentication auth, Model model) {
         PersonDetails personDetails = (PersonDetails) auth.getPrincipal();
-         model.addAttribute("user", personDetails.getFullName());
+        model.addAttribute("user", personDetails.getFullName());
         return "landing";
     }
 
@@ -54,7 +54,7 @@ public class UserController {
 
     @PostMapping("/register")
     public String postRegistration(RegistrationRequest form, Model model) {
-       if(service.registerUser(form))
+        if (service.registerUser(form))
             return "index";
         model.addAttribute("ex", "Please, enter right informations");
         return "registration";
