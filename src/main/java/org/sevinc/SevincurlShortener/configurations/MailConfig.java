@@ -17,7 +17,7 @@ public class MailConfig {
         mailSender.setPort(587);
 
         mailSender.setUsername("shortenerappbysevinc@gmail.com");
-        mailSender.setPassword("UrlShortenerAppBySevinc2020");
+        mailSender.setPassword("UrlShortenerAppBySevinc20");
 
         Properties props = mailSender.getJavaMailProperties();
         props.put("mail.transport.protocol", "smtp");
